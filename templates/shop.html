@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="L&J Marketing Kenya Digital Shop — eBooks, templates, online courses, and memberships for Kenyan businesses. Pay via M-Pesa. Instant delivery.">
+<title>Digital Shop | L&J Marketing Kenya — Marketing Resources for Kenyan Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1F3A;--navy-mid:#142A4E;--gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#F5E9C8;--black:#080C12;--white:#FAFAF8;--offwhite:#F2F0EB;--grey:#E5E2DB;--text:#1A1A2E;--muted:#6B6860;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:rgba(8,12,18,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,0.15);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-badge{width:40px;height:40px;border-radius:50%;background:var(--black);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;}
+.nav-monogram{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--white);}
+.nav-monogram span{color:var(--gold);}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-sub{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(250,250,248,0.4);margin-top:2px;}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
+.nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+.nav-mobile-btn{display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:8px;}
+.hamburger{display:flex;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--gold);border-radius:2px;}
+.mobile-nav{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(8,12,18,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.15);padding:20px 24px 28px;z-index:999;}
+.mobile-nav.open{display:block;}
+.mobile-nav a{display:block;padding:14px 0;font-size:16px;font-weight:500;color:rgba(250,250,248,0.8);border-bottom:1px solid rgba(255,255,255,0.06);}
+.mobile-cta-link{display:block;margin-top:16px;background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;text-align:center;padding:14px;border-radius:10px;}
+
+.page-header{background:var(--navy);padding:140px 0 80px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 70%);}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:60px 60px;}
+.ph-inner{position:relative;z-index:1;}
+.ph-tag{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.ph-tag::before{content:'';width:24px;height:1px;background:var(--gold);}
+.ph-h{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,7vw,62px);font-weight:700;color:var(--white);line-height:1.05;margin-bottom:16px;}
+.ph-h em{color:var(--gold);font-style:italic;}
+.ph-sub{font-size:16px;color:rgba(250,250,248,0.55);max-width:520px;font-weight:300;line-height:1.7;margin-bottom:24px;}
+.mpesa-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--gold);}
+
+/* FILTER TABS */
+.filter-section{background:var(--offwhite);padding:24px 0;border-bottom:1px solid var(--grey);position:sticky;top:68px;z-index:50;}
+.filter-tabs{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.filter-tab{font-size:12px;font-weight:600;padding:8px 18px;border-radius:20px;border:1.5px solid var(--grey);color:var(--muted);cursor:pointer;transition:all 0.2s;background:white;}
+.filter-tab.active,.filter-tab:hover{border-color:var(--navy);color:var(--navy);background:white;}
+.filter-tab.active{background:var(--navy);color:var(--gold);border-color:var(--navy);}
+
+/* PRODUCTS */
+.shop-section{padding:60px 0;}
+.section-tag{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.section-tag::before{content:'';width:24px;height:1px;background:var(--gold);flex-shrink:0;}
+.section-h{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,44px);font-weight:700;color:var(--navy);line-height:1.1;margin-bottom:12px;}
+.section-sub{font-size:15px;color:var(--muted);max-width:540px;font-weight:300;margin-bottom:36px;}
+
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:60px;}
+.product-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(11,31,58,0.08);border:1px solid var(--grey);transition:all 0.3s;display:flex;flex-direction:column;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(11,31,58,0.15);border-color:var(--gold);}
+.product-top{padding:28px 24px 20px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);}
+.product-icon{font-size:32px;margin-bottom:12px;}
+.product-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:rgba(201,168,76,0.2);color:var(--gold);margin-bottom:10px;}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--white);line-height:1.2;}
+.product-body{padding:20px 24px;flex:1;display:flex;flex-direction:column;}
+.product-desc{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:16px;font-weight:300;flex:1;}
+.product-includes{margin-bottom:18px;}
+.pi-title{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.pi-item{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text);margin-bottom:5px;}
+.pi-check{color:var(--gold);font-size:11px;flex-shrink:0;}
+.product-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--grey);}
+.product-price{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--navy);}
+.product-price span{font-size:11px;font-weight:400;color:var(--muted);}
+.buy-btn{background:var(--navy);color:var(--gold);font-size:12px;font-weight:700;letter-spacing:0.5px;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;transition:all 0.2s;}
+.buy-btn:hover{background:var(--navy-mid);transform:translateY(-1px);}
+.buy-btn.gold-btn{background:var(--gold);color:var(--navy);}
+.buy-btn.gold-btn:hover{background:var(--gold-light);}
+.product-mpesa{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;}
+
+/* FEATURED — Membership */
+.membership-banner{background:var(--navy);border-radius:20px;padding:48px 40px;margin-bottom:60px;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.membership-banner::before{content:'';position:absolute;top:-60px;right:100px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(201,168,76,0.1);}
+.mb-tag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.mb-tag::before{content:'⭐';}
+.mb-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,38px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:12px;}
+.mb-title em{color:var(--gold);font-style:italic;}
+.mb-desc{font-size:14px;color:rgba(250,250,248,0.55);line-height:1.7;margin-bottom:24px;font-weight:300;max-width:480px;}
+.mb-perks{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+.mb-perk{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(250,250,248,0.7);}
+.mb-perk::before{content:'✓';color:var(--gold);font-weight:700;}
+.mb-price-box{text-align:center;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:32px 28px;flex-shrink:0;min-width:200px;}
+.mb-price{font-family:'Space Mono',monospace;font-size:36px;font-weight:700;color:var(--gold);line-height:1;}
+.mb-period{font-size:13px;color:rgba(250,250,248,0.4);margin-bottom:20px;}
+.mb-btn{width:100%;background:var(--gold);color:var(--navy);font-size:13px;font-weight:700;padding:14px;border-radius:10px;border:none;cursor:pointer;transition:all 0.2s;display:block;text-align:center;}
+.mb-btn:hover{background:var(--gold-light);}
+.mb-note{font-size:11px;color:rgba(250,250,248,0.3);margin-top:8px;}
+
+/* HOW IT WORKS */
+.how-section{background:var(--offwhite);padding:60px 0;}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px;}
+.how-step{background:white;border-radius:14px;padding:28px 24px;text-align:center;border-bottom:3px solid var(--gold);}
+.hs-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:var(--gold-pale);line-height:1;margin-bottom:8px;}
+.hs-icon{font-size:26px;margin-bottom:12px;}
+.hs-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.hs-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;}
+
+footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201,168,76,0.1);}
+.footer-bottom-simple{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-brand-simple{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);}
+.footer-brand-simple span{color:var(--gold);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+.wa-float{position:fixed;bottom:28px;right:24px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:all 0.25s;animation:waFloat 3s ease-in-out infinite;}
+@keyframes waFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+@media(max-width:900px){.nav-links{display:none;}.nav-mobile-btn{display:block;}.membership-banner{grid-template-columns:1fr;}.mb-price-box{min-width:unset;}.how-steps{grid-template-columns:1fr;}}
+@media(max-width:600px){.how-steps{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
+      <div><div class="nav-name">L<span>&</span>J Marketing Kenya</div><div class="nav-sub">Nairobi · Est. 2024</div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html#book" class="nav-cta">Book Free Call</a></li>
+    </ul>
+    <button class="nav-mobile-btn" onclick="toggleMenu()"><div class="hamburger"><span></span><span></span><span></span></div></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="index.html#services" onclick="toggleMenu()">Services</a>
+  <a href="shop.html" onclick="toggleMenu()">Shop</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  <a href="contact.html#book" class="mobile-cta-link" onclick="toggleMenu()">📞 Book Free Strategy Call</a>
+</div>
+
+<div class="page-header">
+  <div class="ph-grid"></div>
+  <div class="container ph-inner">
+    <div class="ph-tag">Digital Products Shop</div>
+    <h1 class="ph-h">Learn Marketing.<br><em>Grow Your Business.</em></h1>
+    <p class="ph-sub">Affordable digital products built specifically for Kenyan businesses and marketers. Buy once, use forever. Instant delivery after payment.</p>
+    <div class="mpesa-badge">📱 All products payable via M-Pesa · Instant Delivery</div>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-section">
+  <div class="container">
+    <div class="filter-tabs">
+      <div class="filter-tab active" onclick="filterProducts('all',this)">All Products</div>
+      <div class="filter-tab" onclick="filterProducts('ebook',this)">eBooks</div>
+      <div class="filter-tab" onclick="filterProducts('template',this)">Templates</div>
+      <div class="filter-tab" onclick="filterProducts('course',this)">Courses</div>
+      <div class="filter-tab" onclick="filterProducts('membership',this)">Membership</div>
+    </div>
+  </div>
+</div>
+
+<!-- MEMBERSHIP FEATURED -->
+<section class="shop-section" id="membership">
+  <div class="container">
+    <div class="membership-banner">
+      <div>
+        <div class="mb-tag">Most Popular — Recommended</div>
+        <h2 class="mb-title">L&J Marketing<br><em>Inner Circle</em></h2>
+        <p class="mb-desc">Join Nairobi's most practical marketing community. Every month you get tools, templates, live Q&A sessions, and insider marketing strategies that actually work for Kenyan businesses.</p>
+        <div class="mb-perks">
+          <div class="mb-perk">4 marketing tips weekly</div>
+          <div class="mb-perk">Monthly live Q&A with CEO</div>
+          <div class="mb-perk">Full resource vault access</div>
+          <div class="mb-perk">Monthly trend report</div>
+          <div class="mb-perk">Private community</div>
+          <div class="mb-perk">Exclusive member discounts</div>
+        </div>
+      </div>
+      <div class="mb-price-box">
+        <div class="mb-price">KES<br>1,000</div>
+        <div class="mb-period">per month · cancel anytime</div>
+        <a href="https://selar.co/ljmarketingkenya" target="_blank" class="mb-btn">Join Inner Circle →</a>
+        <div class="mb-note">📱 Pay via M-Pesa</div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div class="section-tag">Digital Products</div>
+    <h2 class="section-h">All Products</h2>
+    <p class="section-sub">One-time purchase. Instant delivery to your email. Pay via M-Pesa.</p>
+
+    <div class="products-grid" id="products-grid">
+
+      <div class="product-card" data-cat="ebook">
+        <div class="product-top">
+          <div class="product-icon">📚</div>
+          <div class="product-badge">eBook Guide</div>
+          <div class="product-name">The Nairobi Business Marketing Blueprint</div>
+        </div>
+        <div class="product-body">
+          <div class="product-desc">A 50-page practical guide to digital marketing for Kenyan SMEs. Covers strategy, social media, SEO, Google Ads, WhatsApp marketing, and measuring results — all with Nairobi-specific examples.</div>
+          <div class="product-includes">
+            <div class="pi-title">What's Inside:</div>
+            <div class="pi-item"><span class="pi-check">✓</span>50-page PDF guide</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Nairobi market-specific examples</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Marketing budget calculator</div>
+            <div class="pi-item"><span class="pi-check">✓</span>90-day action plan template</div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">KES 1,499</div>
+            <a href="https://selar.co/ljmarketingkenya" target="_blank"><button class="buy-btn">Buy Now →</button></a>
+          </div>
+          <div class="product-mpesa">📱 Pay via M-Pesa · Instant PDF delivery</div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="template">
+        <div class="product-top">
+          <div class="product-icon">🎨</div>
+          <div class="product-badge">Design Templates</div>
+          <div class="product-name">Canva Social Media Template Pack — Kenya Edition</div>
+        </div>
+        <div class="product-body">
+          <div class="product-desc">30 professionally designed Canva templates for Kenyan businesses. Instagram posts, Stories, WhatsApp flyers, Facebook covers, and LinkedIn banners. Fully customisable — just add your logo and colours.</div>
+          <div class="product-includes">
+            <div class="pi-title">What's Inside:</div>
+            <div class="pi-item"><span class="pi-check">✓</span>30 Canva templates</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Instagram, Facebook, WhatsApp, LinkedIn</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Step-by-step customisation guide</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Free Canva account works fine</div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">KES 2,999</div>
+            <a href="https://selar.co/ljmarketingkenya" target="_blank"><button class="buy-btn">Buy Now →</button></a>
+          </div>
+          <div class="product-mpesa">📱 Pay via M-Pesa · Instant Canva link delivery</div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="course">
+        <div class="product-top">
+          <div class="product-icon">🤖</div>
+          <div class="product-badge">Mini Course + Prompts</div>
+          <div class="product-name">AI Marketing Toolkit for African Businesses</div>
+        </div>
+        <div class="product-body">
+          <div class="product-desc">Learn how to use Claude AI, ChatGPT, and Canva AI to write content, create ads, respond to customers, and grow your business — without hiring a marketing team. Includes 50 ready-to-use prompts.</div>
+          <div class="product-includes">
+            <div class="pi-title">What's Inside:</div>
+            <div class="pi-item"><span class="pi-check">✓</span>3-hour video mini course</div>
+            <div class="pi-item"><span class="pi-check">✓</span>50 AI prompt templates</div>
+            <div class="pi-item"><span class="pi-check">✓</span>PDF workbook</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Lifetime access</div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">KES 4,999</div>
+            <a href="https://selar.co/ljmarketingkenya" target="_blank"><button class="buy-btn gold-btn">Buy Now →</button></a>
+          </div>
+          <div class="product-mpesa">📱 Pay via M-Pesa · Instant access</div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="template">
+        <div class="product-top">
+          <div class="product-icon">📊</div>
+          <div class="product-badge">Done-For-You Templates</div>
+          <div class="product-name">90-Day Social Media Content Calendar</div>
+        </div>
+        <div class="product-body">
+          <div class="product-desc">90 days of pre-planned social media content for your business. Post topics, caption starters, hashtag sets, and content themes — for restaurants, real estate, schools, clinics, and retail businesses.</div>
+          <div class="product-includes">
+            <div class="pi-title">What's Inside:</div>
+            <div class="pi-item"><span class="pi-check">✓</span>90-day content plan (Google Sheets)</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Caption templates for each day</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Hashtag research by industry</div>
+            <div class="pi-item"><span class="pi-check">✓</span>5 industry-specific versions</div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">KES 3,999</div>
+            <a href="https://selar.co/ljmarketingkenya" target="_blank"><button class="buy-btn">Buy Now →</button></a>
+          </div>
+          <div class="product-mpesa">📱 Pay via M-Pesa · Instant Google Sheets access</div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="course">
+        <div class="product-top">
+          <div class="product-icon">🎥</div>
+          <div class="product-badge">Full Online Course</div>
+          <div class="product-name">Digital Marketing for Kenyan SMEs — From Zero to Revenue</div>
+        </div>
+        <div class="product-body">
+          <div class="product-desc">A complete 8-module video course covering digital presence, social media strategy, SEO, Google & Meta Ads, content creation, and measuring results. Real Nairobi business examples throughout.</div>
+          <div class="product-includes">
+            <div class="pi-title">What's Inside:</div>
+            <div class="pi-item"><span class="pi-check">✓</span>8 modules, 30+ video lessons</div>
+            <div class="pi-item"><span class="pi-check">✓</span>PDF workbooks per module</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Certificate of completion</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Lifetime access + updates</div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">KES 14,999</div>
+            <a href="https://selar.co/ljmarketingkenya" target="_blank"><button class="buy-btn gold-btn">Enrol Now →</button></a>
+          </div>
+          <div class="product-mpesa">📱 Pay via M-Pesa · Instant course access</div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="template">
+        <div class="product-top">
+          <div class="product-icon">📄</div>
+          <div class="product-badge">Business Templates</div>
+          <div class="product-name">Marketing Proposal & Contract Template Bundle</div>
+        </div>
+        <div class="product-body">
+          <div class="product-desc">10 professional templates for freelancers and small agencies: marketing proposals, service contracts, client onboarding forms, social media reports, and invoice templates — Kenya-ready.</div>
+          <div class="product-includes">
+            <div class="pi-title">What's Inside:</div>
+            <div class="pi-item"><span class="pi-check">✓</span>10 Google Docs templates</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Marketing proposal template</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Service contract (Kenya law)</div>
+            <div class="pi-item"><span class="pi-check">✓</span>Client report template</div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">KES 1,999</div>
+            <a href="https://selar.co/ljmarketingkenya" target="_blank"><button class="buy-btn">Buy Now →</button></a>
+          </div>
+          <div class="product-mpesa">📱 Pay via M-Pesa · Instant Google Docs access</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-tag">Buying Is Easy</div>
+    <h2 class="section-h">How to Purchase</h2>
+    <p class="section-sub">No complicated checkout. Buy with M-Pesa in 3 simple steps.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="hs-num">01</div>
+        <div class="hs-icon">🛍️</div>
+        <div class="hs-title">Choose Your Product</div>
+        <div class="hs-desc">Select the eBook, template pack, or course you want and click "Buy Now."</div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">02</div>
+        <div class="hs-icon">📱</div>
+        <div class="hs-title">Pay via M-Pesa</div>
+        <div class="hs-desc">Complete payment on Selar using M-Pesa Till, Paybill, or card. Takes under 2 minutes.</div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">03</div>
+        <div class="hs-icon">📧</div>
+        <div class="hs-title">Instant Delivery</div>
+        <div class="hs-desc">Your product is delivered instantly to your email. No waiting — start using it immediately.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom-simple">
+      <div class="footer-brand-simple">L<span>&</span>J Marketing Kenya</div>
+      <div class="footer-copy">© 2025 L&J Marketing Agency Kenya · All digital products delivered via Selar.co</div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/254740788160" class="wa-float" target="_blank">💬</a>
+
+<script>
+function toggleMenu(){document.getElementById('mobile-nav').classList.toggle('open');}
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

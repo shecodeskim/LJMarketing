@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact L&J Marketing Kenya. Book a free 30-minute marketing strategy call. Based in Upperhill, Nairobi. Call 0740 788 160 or WhatsApp us today.">
+<title>Contact & Book a Call | L&J Marketing Kenya — Nairobi Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0B1F3A;--navy-mid:#142A4E;--gold:#C9A84C;--gold-light:#E2C97E;
+  --gold-pale:#F5E9C8;--black:#080C12;--white:#FAFAF8;--offwhite:#F2F0EB;
+  --grey:#E5E2DB;--text:#1A1A2E;--muted:#6B6860;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'Outfit',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:rgba(8,12,18,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,0.15);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-badge{width:40px;height:40px;border-radius:50%;background:var(--black);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(201,168,76,0.2);}
+.nav-monogram{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--white);}
+.nav-monogram span{color:var(--gold);}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-sub{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(250,250,248,0.4);margin-top:2px;}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
+.nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+.nav-mobile-btn{display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:8px;}
+.hamburger{display:flex;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--gold);border-radius:2px;}
+.mobile-nav{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(8,12,18,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.15);padding:20px 24px 28px;z-index:999;}
+.mobile-nav.open{display:block;}
+.mobile-nav a{display:block;padding:14px 0;font-size:16px;font-weight:500;color:rgba(250,250,248,0.8);border-bottom:1px solid rgba(255,255,255,0.06);transition:color 0.2s;}
+.mobile-nav a:hover{color:var(--gold);}
+.mobile-cta-link{display:block;margin-top:16px;background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;text-align:center;padding:14px;border-radius:10px;}
+
+/* PAGE HEADER */
+.page-header{background:var(--navy);padding:140px 0 80px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 70%);}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:60px 60px;}
+.ph-inner{position:relative;z-index:1;}
+.ph-tag{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.ph-tag::before{content:'';width:24px;height:1px;background:var(--gold);}
+.ph-h{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,7vw,62px);font-weight:700;color:var(--white);line-height:1.05;margin-bottom:16px;}
+.ph-h em{color:var(--gold);font-style:italic;}
+.ph-sub{font-size:16px;color:rgba(250,250,248,0.55);max-width:520px;font-weight:300;line-height:1.7;}
+
+/* CONTACT SECTION */
+.contact-section{padding:80px 0;}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;}
+
+/* Left — info */
+.contact-info{}
+.info-block{margin-bottom:36px;}
+.info-title{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.info-title::before{content:'';width:16px;height:1px;background:var(--gold);}
+.info-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px;}
+.info-icon{width:40px;height:40px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.info-text-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;}
+.info-text-val{font-size:13px;color:var(--muted);font-weight:300;}
+.info-text-val a{color:var(--gold);font-weight:600;}
+
+/* WhatsApp CTA */
+.wa-cta{background:var(--navy);border-radius:14px;padding:28px 24px;margin-bottom:28px;}
+.wa-cta-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.wa-cta-sub{font-size:13px;color:rgba(250,250,248,0.5);margin-bottom:20px;font-weight:300;}
+.wa-btn{display:flex;align-items:center;gap:10px;background:#25D366;color:white;font-size:14px;font-weight:700;padding:14px 20px;border-radius:10px;width:100%;justify-content:center;transition:all 0.2s;border:none;cursor:pointer;}
+.wa-btn:hover{background:#20B358;transform:translateY(-1px);}
+
+/* Hours */
+.hours-grid{display:grid;gap:8px;}
+.hour-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--grey);font-size:13px;}
+.hour-row:last-child{border-bottom:none;}
+.hour-day{color:var(--navy);font-weight:600;}
+.hour-time{color:var(--muted);font-weight:300;}
+.hour-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;background:var(--gold-pale);color:var(--navy);}
+
+/* Right — form */
+.contact-form-wrap{background:var(--offwhite);border-radius:20px;padding:40px 36px;}
+.form-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.form-sub{font-size:14px;color:var(--muted);margin-bottom:28px;font-weight:300;}
+.form-group{margin-bottom:18px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin-bottom:6px;}
+input,select,textarea{width:100%;padding:13px 16px;border:1.5px solid var(--grey);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--text);background:white;transition:border-color 0.2s;outline:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
+textarea{resize:vertical;min-height:120px;line-height:1.6;}
+select{cursor:pointer;}
+.form-note{font-size:12px;color:var(--muted);margin-bottom:20px;font-weight:300;}
+.submit-btn{width:100%;padding:16px;background:var(--navy);color:var(--gold);font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.5px;border:none;border-radius:10px;cursor:pointer;transition:all 0.2s;}
+.submit-btn:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 8px 24px rgba(11,31,58,0.3);}
+.form-success{display:none;text-align:center;padding:20px;background:#E8F5E9;border-radius:10px;color:#1A5C35;font-weight:600;}
+
+/* BOOKING SECTION */
+.booking-section{background:var(--navy);padding:80px 0;}
+.booking-inner{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;align-items:start;}
+.booking-info{}
+.booking-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,44px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:16px;}
+.booking-title em{color:var(--gold);font-style:italic;}
+.booking-sub{font-size:15px;color:rgba(250,250,248,0.55);margin-bottom:32px;font-weight:300;line-height:1.7;}
+.booking-includes{display:grid;gap:14px;margin-bottom:32px;}
+.bi-item{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(250,250,248,0.75);}
+.bi-check{width:22px;height:22px;border-radius:50%;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);flex-shrink:0;}
+.booking-note{font-size:12px;color:rgba(250,250,248,0.3);font-style:italic;}
+
+/* Calendly embed placeholder */
+.calendly-embed{background:white;border-radius:16px;overflow:hidden;min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 30px;}
+.cal-icon{font-size:48px;margin-bottom:16px;}
+.cal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:10px;}
+.cal-desc{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.6;font-weight:300;}
+.cal-steps{text-align:left;display:grid;gap:10px;margin-bottom:28px;width:100%;}
+.cal-step{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text);}
+.cal-step-num{width:24px;height:24px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cal-btn{background:var(--navy);color:var(--gold);font-size:14px;font-weight:700;padding:14px 28px;border-radius:10px;border:none;cursor:pointer;transition:all 0.2s;width:100%;}
+.cal-btn:hover{background:var(--navy-mid);}
+.cal-alt{font-size:12px;color:var(--muted);margin-top:12px;}
+.cal-alt a{color:var(--gold);font-weight:600;}
+
+/* MAP */
+.map-section{padding:60px 0;background:var(--offwhite);}
+.map-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.map-placeholder{background:var(--navy);border-radius:14px;height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;}
+.map-icon{font-size:40px;margin-bottom:12px;}
+.map-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.map-addr{font-size:14px;color:rgba(250,250,248,0.55);margin-bottom:16px;font-weight:300;line-height:1.6;}
+.map-btn{font-size:12px;font-weight:700;background:var(--gold);color:var(--navy);padding:10px 20px;border-radius:8px;border:none;cursor:pointer;}
+.map-details{}
+.map-detail-title{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.map-detail-h{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--navy);margin-bottom:12px;}
+.map-detail-body{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:20px;}
+.service-areas{display:flex;flex-wrap:wrap;gap:8px;}
+.area-tag{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;background:white;border:1px solid var(--grey);color:var(--navy);}
+
+/* FOOTER */
+footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201,168,76,0.1);}
+.footer-bottom-simple{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-brand-simple{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);}
+.footer-brand-simple span{color:var(--gold);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+
+.wa-float{position:fixed;bottom:28px;right:24px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:all 0.25s;animation:waFloat 3s ease-in-out infinite;}
+.wa-float:hover{transform:scale(1.1);}
+@keyframes waFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .nav-mobile-btn{display:block;}
+  .contact-grid{grid-template-columns:1fr;}
+  .booking-inner{grid-template-columns:1fr;}
+  .map-inner{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
+      <div>
+        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
+        <div class="nav-sub">Nairobi · Est. 2024</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="#book" class="nav-cta">Book Free Call</a></li>
+    </ul>
+    <button class="nav-mobile-btn" onclick="toggleMenu()">
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="index.html#services" onclick="toggleMenu()">Services</a>
+  <a href="index.html#about" onclick="toggleMenu()">About</a>
+  <a href="portfolio.html" onclick="toggleMenu()">Portfolio</a>
+  <a href="shop.html" onclick="toggleMenu()">Shop</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="#book" class="mobile-cta-link" onclick="toggleMenu()">📞 Book Free Strategy Call</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="ph-grid"></div>
+  <div class="container ph-inner">
+    <div class="ph-tag">Get In Touch</div>
+    <h1 class="ph-h">Let's Talk About<br><em>Growing Your Business</em></h1>
+    <p class="ph-sub">Book a free 30-minute strategy call, send us a message, or WhatsApp us directly. We respond to all enquiries within 2 hours during business hours.</p>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Left: Info -->
+      <div class="contact-info">
+        <div class="info-block">
+          <div class="info-title">Get In Touch</div>
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-text-title">Our Location</div>
+              <div class="info-text-val">KMA Centre, Upperhill<br>Nairobi, Kenya</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div>
+              <div class="info-text-title">Phone / WhatsApp</div>
+              <div class="info-text-val"><a href="tel:+254740788160">0740 788 160</a></div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div>
+              <div class="info-text-title">Email</div>
+              <div class="info-text-val"><a href="mailto:hello@ljmarketingkenya.co.ke">hello@ljmarketingkenya.co.ke</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wa-cta">
+          <div class="wa-cta-title">Prefer to WhatsApp?</div>
+          <div class="wa-cta-sub">Most of our clients reach us on WhatsApp. Send us a message and we'll respond within the hour.</div>
+          <a href="https://wa.me/254740788160?text=Hi%20L%26J%20Marketing!%20I%27d%20like%20to%20enquire%20about%20your%20services." class="wa-btn" target="_blank">
+            💬 WhatsApp Us Now
+          </a>
+        </div>
+
+        <div class="info-block">
+          <div class="info-title">Business Hours</div>
+          <div class="hours-grid">
+            <div class="hour-row"><span class="hour-day">Monday – Friday</span><span class="hour-time">8:00 AM – 6:00 PM</span></div>
+            <div class="hour-row"><span class="hour-day">Saturday</span><span class="hour-time">9:00 AM – 2:00 PM</span></div>
+            <div class="hour-row"><span class="hour-day">Sunday</span><span class="hour-badge">By Appointment</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="contact-form-wrap">
+        <div class="form-title">Send Us a Message</div>
+        <div class="form-sub">Fill in the form below and we'll get back to you within 2 hours.</div>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" placeholder="Kamau" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" placeholder="john@business.co.ke" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">WhatsApp / Phone *</label>
+              <input type="tel" id="phone" placeholder="0712 345 678" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="business">Business Name</label>
+            <input type="text" id="business" placeholder="Your Business Name">
+          </div>
+          <div class="form-group">
+            <label for="service">Service You're Interested In</label>
+            <select id="service">
+              <option value="">Select a service...</option>
+              <option>Marketing Consultancy & Strategy</option>
+              <option>Social Media Management</option>
+              <option>Website Design & Development</option>
+              <option>Branding & Visual Identity</option>
+              <option>SEO & Digital Marketing</option>
+              <option>Content Creation & Copywriting</option>
+              <option>Google Ads & Paid Social</option>
+              <option>Corporate Marketing Training</option>
+              <option>Multiple Services / Full Package</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="budget">Monthly Budget Range</label>
+            <select id="budget">
+              <option value="">Select budget range...</option>
+              <option>Under KES 15,000</option>
+              <option>KES 15,000 – 30,000</option>
+              <option>KES 30,000 – 60,000</option>
+              <option>KES 60,000 – 100,000</option>
+              <option>Over KES 100,000</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell Us About Your Business *</label>
+            <textarea id="message" placeholder="What does your business do? What's your biggest marketing challenge right now?" required></textarea>
+          </div>
+          <div class="form-note">✓ We respond within 2 hours during business hours. Your information is kept strictly confidential.</div>
+          <button type="submit" class="submit-btn">Send Message → We'll Respond Within 2 Hours</button>
+          <div class="form-success" id="form-success">
+            ✅ Thank you! Your message has been sent. We'll respond on WhatsApp within 2 hours. In the meantime, why not book a free strategy call below?
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING SECTION -->
+<section class="booking-section" id="book">
+  <div class="container">
+    <div class="booking-inner">
+      <div class="booking-info">
+        <div style="font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px;"><span style="width:24px;height:1px;background:var(--gold);display:block;"></span>Free — No Obligation</div>
+        <h2 class="booking-title">Book Your<br><em>Free 30-Minute</em><br>Strategy Call</h2>
+        <p class="booking-sub">In 30 minutes, we'll review your current marketing, identify your biggest growth opportunities, and give you a clear action plan — completely free.</p>
+        <div class="booking-includes">
+          <div class="bi-item"><div class="bi-check">✓</div>Google Business Profile review</div>
+          <div class="bi-item"><div class="bi-check">✓</div>Social media audit & quick wins</div>
+          <div class="bi-item"><div class="bi-check">✓</div>Website & SEO health check</div>
+          <div class="bi-item"><div class="bi-check">✓</div>3 personalised recommendations</div>
+          <div class="bi-item"><div class="bi-check">✓</div>Competitor landscape overview</div>
+          <div class="bi-item"><div class="bi-check">✓</div>No obligation — zero sales pressure</div>
+        </div>
+        <div class="booking-note">"The free call alone gave us more clarity than 6 months of trying to figure it out ourselves." — Client, Nairobi</div>
+      </div>
+
+      <!-- Calendly Embed Area -->
+      <div class="calendly-embed" id="book">
+        <div class="cal-icon">📅</div>
+        <div class="cal-title">Book Your Free Strategy Call</div>
+        <div class="cal-desc">Choose a time that works for you. Calls are conducted via phone, WhatsApp video, or Google Meet.</div>
+        <div class="cal-steps">
+          <div class="cal-step"><div class="cal-step-num">1</div>Click the button below to open booking calendar</div>
+          <div class="cal-step"><div class="cal-step-num">2</div>Select your preferred date and time</div>
+          <div class="cal-step"><div class="cal-step-num">3</div>Enter your name and WhatsApp number</div>
+          <div class="cal-step"><div class="cal-step-num">4</div>Receive confirmation + reminder on WhatsApp</div>
+        </div>
+        <a href="https://calendly.com/ljmarketingkenya" target="_blank" class="cal-btn">📅 Open Booking Calendar</a>
+        <div class="cal-alt">Or book via WhatsApp: <a href="https://wa.me/254740788160?text=Hi!%20I%27d%20like%20to%20book%20a%20free%20strategy%20call.">Click here to message us</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="container">
+    <div class="map-inner">
+      <div class="map-placeholder">
+        <div class="map-icon">📍</div>
+        <div class="map-title">KMA Centre, Upperhill</div>
+        <div class="map-addr">KMA Centre, Hospital Road<br>Upperhill, Nairobi, Kenya</div>
+        <a href="https://maps.google.com/?q=KMA+Centre+Upperhill+Nairobi" target="_blank"><button class="map-btn">Open in Google Maps →</button></a>
+      </div>
+      <div class="map-details">
+        <div class="map-detail-title">Our Location</div>
+        <h3 class="map-detail-h">Serving All of Nairobi & Beyond</h3>
+        <p class="map-detail-body">Our office is located at KMA Centre in Upperhill — Nairobi's premier business district. We serve clients across Nairobi and throughout Kenya. Most client meetings are conducted virtually via WhatsApp video or Google Meet for your convenience.</p>
+        <div class="service-areas">
+          <span class="area-tag">Upperhill</span>
+          <span class="area-tag">Westlands</span>
+          <span class="area-tag">Kilimani</span>
+          <span class="area-tag">Karen</span>
+          <span class="area-tag">CBD</span>
+          <span class="area-tag">Parklands</span>
+          <span class="area-tag">South B & C</span>
+          <span class="area-tag">All Kenya</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom-simple">
+      <div class="footer-brand-simple">L<span>&</span>J Marketing Kenya</div>
+      <div class="footer-copy">© 2025 L&J Marketing Agency Kenya · KMA Centre, Upperhill, Nairobi</div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/254740788160" class="wa-float" target="_blank">💬</a>
+
+<script>
+function toggleMenu(){document.getElementById('mobile-nav').classList.toggle('open');}
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('form-success').style.display='block';
+  e.target.reset();
+  setTimeout(()=>{document.getElementById('form-success').style.display='none';},8000);
+}
+</script>
+</body>
+</html>
