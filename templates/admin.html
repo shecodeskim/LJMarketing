@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Admin Dashboard - L&J Marketing Kenya">
+<title>Admin Dashboard | L&J Marketing Kenya</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1F3A;--navy-mid:#142A4E;--gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#F5E9C8;--black:#080C12;--white:#FAFAF8;--offwhite:#F2F0EB;--grey:#E5E2DB;--text:#1A1A2E;--muted:#6B6860;--green:#1A5C35;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--offwhite);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:rgba(8,12,18,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,0.15);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-badge{width:40px;height:40px;border-radius:50%;background:var(--black);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;}
+.nav-monogram{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--white);}
+.nav-monogram span{color:var(--gold);}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-sub{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(250,250,248,0.4);margin-top:2px;}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
+.nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+.admin-dropdown{position:relative;}
+.admin-dropdown-btn{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.admin-dropdown-btn::after{content:'▼';font-size:8px;margin-left:4px;}
+.admin-menu{position:absolute;top:100%;right:0;background:var(--black);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:8px 0;min-width:180px;display:none;z-index:1001;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.admin-menu.show{display:block;}
+.admin-menu a{display:block;padding:10px 16px;font-size:12px;color:rgba(250,250,248,0.8);transition:all 0.2s;}
+.admin-menu a:hover{background:rgba(201,168,76,0.1);color:var(--gold);}
+.admin-menu .admin-divider{height:1px;background:rgba(255,255,255,0.1);margin:8px 0;}
+
+.admin-page{padding:120px 0 60px;min-height:100vh;}
+.admin-header{margin-bottom:40px;}
+.admin-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,48px);font-weight:700;color:var(--navy);margin-bottom:8px;}
+.admin-sub{font-size:15px;color:var(--muted);font-weight:300;}
+
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+
+.admin-card{background:white;border-radius:16px;padding:32px;border:1px solid var(--grey);box-shadow:0 4px 20px rgba(11,31,58,0.06);}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:24px;}
+
+.form-group{margin-bottom:20px;}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin-bottom:8px;}
+input,select,textarea{width:100%;padding:14px 16px;border:1.5px solid var(--grey);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--text);background:white;transition:border-color 0.2s;outline:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
+textarea{resize:vertical;min-height:100px;}
+.submit-btn{width:100%;padding:16px;background:var(--navy);color:var(--gold);font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.5px;border:none;border-radius:10px;cursor:pointer;transition:all 0.2s;}
+.submit-btn:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 8px 24px rgba(11,31,58,0.3);}
+
+.products-list{display:grid;gap:16px;}
+.product-item{background:var(--offwhite);border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px;transition:all 0.2s;}
+.product-item:hover{background:var(--grey);}
+.p-icon{width:48px;height:48px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.p-info{flex:1;}
+.p-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.p-meta{font-size:12px;color:var(--muted);}
+.p-actions{display:flex;gap:8px;}
+.p-btn{padding:8px 16px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:600;transition:all 0.2s;}
+.p-btn.edit{background:var(--navy);color:var(--gold);}
+.p-btn.edit:hover{background:var(--navy-mid);}
+.p-btn.delete{background:rgba(220,80,80,0.15);color:#DC5050;border:1px solid rgba(220,80,80,0.3);}
+.p-btn.delete:hover{background:rgba(220,80,80,0.25);}
+
+.error-msg{display:none;background:rgba(220,80,80,0.1);border:1px solid rgba(220,80,80,0.3);border-radius:8px;padding:12px;margin-bottom:20px;font-size:13px;color:#DC5050;}
+.error-msg.show{display:block;}
+.success-msg{display:none;background:rgba(26,92,53,0.1);border:1px solid rgba(26,92,53,0.3);border-radius:8px;padding:12px;margin-bottom:20px;font-size:13px;color:var(--green);}
+.success-msg.show{display:block;}
+
+.loading{text-align:center;padding:60px 20px;color:var(--muted);}
+.access-denied{text-align:center;padding:80px 20px;background:white;border-radius:16px;border:1px solid var(--grey);}
+.denied-icon{font-size:64px;margin-bottom:16px;}
+.denied-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.denied-desc{font-size:14px;color:var(--muted);margin-bottom:24px;}
+
+@media(max-width:900px){
+  .admin-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .admin-page{padding:100px 0 40px;}
+  .product-item{flex-direction:column;align-items:flex-start;}
+  .p-actions{width:100%;justify-content:flex-end;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
+      <div>
+        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
+        <div class="nav-sub">Nairobi · Est. 2024</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li class="admin-dropdown">
+        <span class="nav-cta admin-dropdown-btn" onclick="toggleAdminMenu()">Admin ▼</span>
+        <div class="admin-menu" id="admin-menu">
+          <a href="admin.html">📦 Add Products</a>
+          <a href="account.html">👤 My Account</a>
+          <a href="index.html">🏠 Home</a>
+          <div class="admin-divider"></div>
+          <a href="#" onclick="handleLogout()">🚪 Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="admin-page">
+  <div class="container">
+    <div class="admin-header">
+      <h1 class="admin-title">Admin Dashboard</h1>
+      <p class="admin-sub">Manage products and shop inventory</p>
+    </div>
+
+    <div id="loading" class="loading">
+      <p>Checking permissions...</p>
+    </div>
+
+    <div id="access-denied" class="access-denied" style="display:none;">
+      <div class="denied-icon">🔒</div>
+      <h2 class="denied-title">Access Denied</h2>
+      <p class="denied-desc">You don't have permission to access this page. Admin access only.</p>
+      <a href="index.html" class="submit-btn" style="width:auto;display:inline-block;padding:12px 28px;">Return Home</a>
+    </div>
+
+    <div class="admin-grid" id="admin-content" style="display:none;">
+      <div class="admin-card">
+        <h2 class="card-title">Add New Product</h2>
+        <div class="error-msg" id="error-msg"></div>
+        <div class="success-msg" id="success-msg"></div>
+        <form onsubmit="handleAddProduct(event)">
+          <div class="form-group">
+            <label for="p-name">Product Name</label>
+            <input type="text" id="p-name" placeholder="e.g., Marketing Guide eBook" required>
+          </div>
+          <div class="form-group">
+            <label for="p-icon">Icon (Emoji)</label>
+            <input type="text" id="p-icon" placeholder="e.g., 📚" required maxlength="2">
+          </div>
+          <div class="form-group">
+            <label for="p-badge">Badge</label>
+            <input type="text" id="p-badge" placeholder="e.g., eBook Guide" required>
+          </div>
+          <div class="form-group">
+            <label for="p-category">Category</label>
+            <select id="p-category" required>
+              <option value="">Select category...</option>
+              <option value="ebook">eBook</option>
+              <option value="template">Template</option>
+              <option value="course">Course</option>
+              <option value="course">Membership</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="p-price">Price (KES)</label>
+            <input type="number" id="p-price" placeholder="e.g., 1499" required min="0">
+          </div>
+          <div class="form-group">
+            <label for="p-desc">Description</label>
+            <textarea id="p-desc" placeholder="Product description..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="p-features">Features (one per line)</label>
+            <textarea id="p-features" placeholder="50-page PDF guide&#10;Nairobi examples&#10;Marketing calculator" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Add Product →</button>
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h2 class="card-title">Existing Products</h2>
+        <div class="products-list" id="products-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const sb = supabase.createClient('https://wzjxazdksgjrhjycocpw.supabase.co', 'sb_publishable_opqpZEV2qXCtyhZ8stvzvg_HRzKlicl');
+
+  async function checkAdminAccess() {
+    const loading = document.getElementById('loading');
+    const accessDenied = document.getElementById('access-denied');
+    const adminContent = document.getElementById('admin-content');
+
+    const { data: { user } } = await sb.auth.getUser();
+
+    if (!user) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+
+    if (!profile || profile.role !== 'admin') {
+      loading.style.display = 'none';
+      accessDenied.style.display = 'block';
+      return;
+    }
+
+    loading.style.display = 'none';
+    adminContent.style.display = 'grid';
+    loadProducts();
+  }
+
+  async function loadProducts() {
+    const { data: products } = await sb.from('products').select('*').order('created_at', { ascending: false });
+    
+    const productsList = document.getElementById('products-list');
+    
+    if (!products || products.length === 0) {
+      productsList.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No products yet</p>';
+      return;
+    }
+
+    productsList.innerHTML = products.map(product => `
+      <div class="product-item">
+        <div class="p-icon">${product.icon}</div>
+        <div class="p-info">
+          <div class="p-name">${product.name}</div>
+          <div class="p-meta">${product.badge} · KES ${product.price.toLocaleString()}</div>
+        </div>
+        <div class="p-actions">
+          <button class="p-btn edit" onclick="editProduct('${product.id}')">Edit</button>
+          <button class="p-btn delete" onclick="deleteProduct('${product.id}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function handleAddProduct(e) {
+    e.preventDefault();
+    const errorMsg = document.getElementById('error-msg');
+    const successMsg = document.getElementById('success-msg');
+
+    errorMsg.classList.remove('show');
+    successMsg.classList.remove('show');
+
+    const product = {
+      name: document.getElementById('p-name').value,
+      icon: document.getElementById('p-icon').value,
+      badge: document.getElementById('p-badge').value,
+      category: document.getElementById('p-category').value,
+      price: parseInt(document.getElementById('p-price').value),
+      description: document.getElementById('p-desc').value,
+      features: document.getElementById('p-features').value.split('\n').filter(f => f.trim())
+    };
+
+    const { error } = await sb.from('products').insert(product);
+
+    if (error) {
+      errorMsg.textContent = error.message;
+      errorMsg.classList.add('show');
+    } else {
+      successMsg.textContent = 'Product added successfully!';
+      successMsg.classList.add('show');
+      e.target.reset();
+      loadProducts();
+      setTimeout(() => successMsg.classList.remove('show'), 3000);
+    }
+  }
+
+  async function deleteProduct(id) {
+    if (!confirm('Are you sure you want to delete this product?')) return;
+
+    const { error } = await sb.from('products').delete().eq('id', id);
+
+    if (error) {
+      alert('Error deleting product: ' + error.message);
+    } else {
+      loadProducts();
+    }
+  }
+
+  function editProduct(id) {
+    alert('Edit functionality coming soon. For now, delete and re-add the product.');
+  }
+
+  function toggleAdminMenu() {
+    const menu = document.getElementById('admin-menu');
+    menu.classList.toggle('show');
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    const dropdown = document.querySelector('.admin-dropdown');
+    if (dropdown && !dropdown.contains(e.target)) {
+      document.getElementById('admin-menu').classList.remove('show');
+    }
+  });
+
+  async function handleLogout() {
+    await sb.auth.signOut();
+    window.location.href = 'login.html';
+  }
+
+  checkAdminAccess();
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Login to your L&J Marketing Kenya account - Access your Inner Circle membership and digital products.">
+<title>Login | L&J Marketing Kenya</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0B1F3A;--navy-mid:#142A4E;--gold:#C9A84C;--gold-light:#E2C97E;
+  --gold-pale:#F5E9C8;--black:#080C12;--white:#FAFAF8;--offwhite:#F2F0EB;
+  --grey:#E5E2DB;--text:#1A1A2E;--muted:#6B6860;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'Outfit',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:rgba(8,12,18,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,0.15);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-badge{width:40px;height:40px;border-radius:50%;background:var(--black);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;}
+.nav-monogram{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--white);}
+.nav-monogram span{color:var(--gold);}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-sub{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(250,250,248,0.4);margin-top:2px;}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
+.nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
+.nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.08);}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+
+.auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 60px;background:var(--offwhite);}
+.auth-container{max-width:440px;width:100%;background:white;border-radius:20px;padding:48px 40px;box-shadow:0 8px 32px rgba(11,31,58,0.1);border:1px solid var(--grey);}
+.auth-header{text-align:center;margin-bottom:32px;}
+.auth-logo{width:64px;height:64px;border-radius:50%;background:var(--navy);border:2px solid var(--gold);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;}
+.auth-logo .nav-monogram{font-size:24px;}
+.auth-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.auth-sub{font-size:14px;color:var(--muted);font-weight:300;}
+
+.form-group{margin-bottom:20px;}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin-bottom:8px;}
+input{width:100%;padding:14px 16px;border:1.5px solid var(--grey);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--text);background:white;transition:border-color 0.2s;outline:none;}
+input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
+.submit-btn{width:100%;padding:16px;background:var(--navy);color:var(--gold);font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.5px;border:none;border-radius:10px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.submit-btn:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 8px 24px rgba(11,31,58,0.3);}
+.submit-btn:disabled{opacity:0.6;cursor:not-allowed;}
+
+.auth-divider{display:flex;align-items:center;gap:16px;margin:24px 0;color:var(--muted);font-size:13px;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--grey);}
+
+.auth-footer{text-align:center;margin-top:24px;font-size:14px;color:var(--muted);}
+.auth-footer a{color:var(--gold);font-weight:600;}
+
+.error-msg{display:none;background:rgba(220,80,80,0.1);border:1px solid rgba(220,80,80,0.3);border-radius:8px;padding:12px;margin-bottom:20px;font-size:13px;color:#DC5050;}
+.error-msg.show{display:block;}
+
+.wa-float{position:fixed;bottom:28px;right:24px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:all 0.25s;animation:waFloat 3s ease-in-out infinite;}
+.wa-float:hover{transform:scale(1.1);}
+@keyframes waFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+@media(max-width:600px){
+  .auth-container{padding:32px 24px;}
+  .auth-title{font-size:28px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
+      <div>
+        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
+        <div class="nav-sub">Nairobi · Est. 2024</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="signup.html" class="nav-cta">Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="auth-logo"><div class="nav-monogram">L<span>&</span>J</div></div>
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-sub">Login to your account</p>
+    </div>
+
+    <div class="error-msg" id="error-msg"></div>
+
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@business.co.ke" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Your password" required>
+      </div>
+      <button type="submit" class="submit-btn" id="submit-btn">Login →</button>
+    </form>
+
+    <div class="auth-divider">or</div>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="signup.html">Sign up here</a>
+    </div>
+  </div>
+</div>
+
+<a href="https://wa.me/254740788160" class="wa-float" target="_blank">💬</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const sb = supabase.createClient('https://wzjxazdksgjrhjycocpw.supabase.co', 'sb_publishable_opqpZEV2qXCtyhZ8stvzvg_HRzKlicl');
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('error-msg');
+    const submitBtn = document.getElementById('submit-btn');
+
+    errorMsg.classList.remove('show');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Logging in...';
+
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Login →';
+
+    if (error) {
+      errorMsg.textContent = error.message;
+      errorMsg.classList.add('show');
+    } else {
+      // Check user role and redirect accordingly
+      const { data: { user } } = await sb.auth.getUser();
+      if (user) {
+        const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+        if (profile && profile.role === 'admin') {
+          window.location.href = 'admin.html';
+        } else {
+          window.location.href = 'account.html';
+        }
+      } else {
+        window.location.href = 'account.html';
+      }
+    }
+  }
+</script>
+</body>
+</html>

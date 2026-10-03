@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Your L&J Marketing Kenya account - Manage your Inner Circle subscription and access exclusive resources.">
+<title>My Account | L&J Marketing Kenya</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0B1F3A;--navy-mid:#142A4E;--gold:#C9A84C;--gold-light:#E2C97E;
+  --gold-pale:#F5E9C8;--black:#080C12;--white:#FAFAF8;--offwhite:#F2F0EB;
+  --grey:#E5E2DB;--text:#1A1A2E;--muted:#6B6860;--green:#1A5C35;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'Outfit',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:rgba(8,12,18,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,0.15);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-badge{width:40px;height:40px;border-radius:50%;background:var(--black);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;}
+.nav-monogram{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--white);}
+.nav-monogram span{color:var(--gold);}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-sub{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(250,250,248,0.4);margin-top:2px;}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
+.nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
+.nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.08);}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+
+.account-page{padding:120px 0 60px;background:var(--offwhite);min-height:100vh;}
+.account-header{margin-bottom:40px;}
+.account-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,48px);font-weight:700;color:var(--navy);margin-bottom:8px;}
+.account-sub{font-size:15px;color:var(--muted);font-weight:300;}
+
+.account-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:32px;}
+
+.profile-card{background:white;border-radius:16px;padding:32px;border:1px solid var(--grey);box-shadow:0 4px 20px rgba(11,31,58,0.06);}
+.profile-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--grey);}
+.profile-avatar{width:64px;height:64px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:700;}
+.profile-info h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.profile-email{font-size:13px;color:var(--muted);}
+
+.profile-section{margin-bottom:24px;}
+.profile-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.profile-value{font-size:14px;color:var(--text);font-weight:300;}
+
+.subscription-card{background:white;border-radius:16px;padding:32px;border:1px solid var(--grey);box-shadow:0 4px 20px rgba(11,31,58,0.06);}
+.sub-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--grey);}
+.sub-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--navy);}
+.sub-status{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border-radius:20px;}
+.sub-status.active{background:rgba(26,92,53,0.15);color:var(--green);border:1px solid rgba(26,92,53,0.3);}
+.sub-status.inactive{background:rgba(107,104,96,0.15);color:var(--muted);border:1px solid rgba(107,104,96,0.3);}
+
+.sub-details{display:grid;gap:16px;margin-bottom:24px;}
+.sub-detail{display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--offwhite);border-radius:8px;}
+.sub-detail-label{font-size:12px;color:var(--muted);font-weight:500;}
+.sub-detail-value{font-size:14px;color:var(--navy);font-weight:600;}
+
+.sub-features{display:grid;gap:10px;margin-bottom:24px;}
+.sub-feature{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);}
+.sub-feature::before{content:'✓';color:var(--gold);font-weight:700;}
+
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:var(--gold);font-size:13px;font-weight:700;padding:14px 24px;border-radius:8px;border:none;cursor:pointer;transition:all 0.2s;}
+.btn-primary:hover{background:var(--navy-mid);transform:translateY(-1px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid var(--grey);color:var(--text);font-size:13px;font-weight:600;padding:14px 24px;border-radius:8px;cursor:pointer;transition:all 0.2s;}
+.btn-outline:hover{border-color:var(--navy);color:var(--navy);}
+
+.loading{text-align:center;padding:60px 20px;color:var(--muted);}
+.loading-spinner{width:40px;height:40px;border:3px solid var(--grey);border-top-color:var(--gold);border-radius:50%;margin:0 auto 16px;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.wa-float{position:fixed;bottom:28px;right:24px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:all 0.25s;animation:waFloat 3s ease-in-out infinite;}
+.wa-float:hover{transform:scale(1.1);}
+@keyframes waFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+@media(max-width:900px){
+  .account-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .account-page{padding:100px 0 40px;}
+  .profile-card,.subscription-card{padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
+      <div>
+        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
+        <div class="nav-sub">Nairobi · Est. 2024</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="#" onclick="handleLogout()" class="nav-cta">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="account-page">
+  <div class="container">
+    <div class="account-header">
+      <h1 class="account-title">My Account</h1>
+      <p class="account-sub">Manage your subscription and profile</p>
+    </div>
+
+    <div id="loading" class="loading">
+      <div class="loading-spinner"></div>
+      <p>Loading your account...</p>
+    </div>
+
+    <div class="account-grid" id="account-content" style="display:none;">
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" id="avatar-initials">LJ</div>
+          <div class="profile-info">
+            <h3 id="user-email">user@example.com</h3>
+            <div class="profile-email">Member since <span id="joined-date">2025</span></div>
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-label">Account Email</div>
+          <div class="profile-value" id="profile-email">user@example.com</div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-label">Account Status</div>
+          <div class="profile-value" style="color:var(--green);">✓ Active</div>
+        </div>
+      </div>
+
+      <div class="subscription-card">
+        <div class="sub-header">
+          <h2 class="sub-title">Inner Circle Membership</h2>
+          <span class="sub-status inactive" id="sub-status">Not Subscribed</span>
+        </div>
+
+        <div id="no-subscription">
+          <p style="margin-bottom:24px;color:var(--muted);font-size:14px;">Join Nairobi's most practical marketing community. Get weekly tips, live Q&A sessions, and exclusive resources.</p>
+          <a href="shop.html#membership" class="btn-primary">Join Inner Circle →</a>
+        </div>
+
+        <div id="active-subscription" style="display:none;">
+          <div class="sub-details">
+            <div class="sub-detail">
+              <span class="sub-detail-label">Plan</span>
+              <span class="sub-detail-value">Inner Circle Monthly</span>
+            </div>
+            <div class="sub-detail">
+              <span class="sub-detail-label">Price</span>
+              <span class="sub-detail-value">KES 1,000/month</span>
+            </div>
+            <div class="sub-detail">
+              <span class="sub-detail-label">Next Billing</span>
+              <span class="sub-detail-value" id="next-billing">-</span>
+            </div>
+          </div>
+          <div class="sub-features">
+            <div class="sub-feature">Weekly marketing tips</div>
+            <div class="sub-feature">Monthly live Q&A with CEO</div>
+            <div class="sub-feature">Full resource vault access</div>
+            <div class="sub-feature">Monthly trend reports</div>
+            <div class="sub-feature">Private community access</div>
+            <div class="sub-feature">Exclusive member discounts</div>
+          </div>
+          <button class="btn-outline" onclick="window.location.href='https://wa.me/254740788160?text=Hi%20I%27d%20like%20to%20cancel%20my%20Inner%20Circle%20membership'">Cancel Subscription</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="https://wa.me/254740788160" class="wa-float" target="_blank">💬</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const sb = supabase.createClient('https://wzjxazdksgjrhjycocpw.supabase.co', 'sb_publishable_opqpZEV2qXCtyhZ8stvzvg_HRzKlicl');
+
+  async function loadAccount() {
+    const loading = document.getElementById('loading');
+    const content = document.getElementById('account-content');
+
+    const { data: { user } } = await sb.auth.getUser();
+
+    if (!user) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // Check if user is admin and redirect to admin dashboard
+    const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+    
+    if (profile && profile.role === 'admin') {
+      window.location.href = 'admin.html';
+      return;
+    }
+
+    document.getElementById('user-email').textContent = user.email;
+    document.getElementById('profile-email').textContent = user.email;
+    document.getElementById('avatar-initials').textContent = user.email.substring(0, 2).toUpperCase();
+    document.getElementById('joined-date').textContent = new Date(user.created_at).getFullYear();
+
+    const { data: sub } = await sb.from('subscriptions').select('*').single();
+
+    if (sub && sub.status === 'active') {
+      document.getElementById('sub-status').textContent = 'Active';
+      document.getElementById('sub-status').className = 'sub-status active';
+      document.getElementById('no-subscription').style.display = 'none';
+      document.getElementById('active-subscription').style.display = 'block';
+      
+      if (sub.next_billing) {
+        document.getElementById('next-billing').textContent = new Date(sub.next_billing).toLocaleDateString('en-KE', { month: 'long', day: 'numeric', year: 'numeric' });
+      }
+    }
+
+    loading.style.display = 'none';
+    content.style.display = 'grid';
+  }
+
+  async function handleLogout() {
+    await sb.auth.signOut();
+    window.location.href = 'index.html';
+  }
+
+  loadAccount();
+</script>
+</body>
+</html>

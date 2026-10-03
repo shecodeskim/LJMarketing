@@ -404,12 +404,19 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
 
 <script>
 function toggleMenu(){document.getElementById('mobile-nav').classList.toggle('open');}
-function handleSubmit(e){
+async function handleSubmit(e) {
   e.preventDefault();
-  document.getElementById('form-success').style.display='block';
-  e.target.reset();
-  setTimeout(()=>{document.getElementById('form-success').style.display='none';},8000);
+  const { error } = await sb.from('leads').insert({
+    name: fname.value + ' ' + lname.value, email: email.value, phone: phone.value,
+    business: business.value, service: service.value, budget: budget.value, message: message.value
+  });
+  alert(error ? 'Something went wrong, please try WhatsApp.' : 'Thanks! We will respond within 2 hours.');
 }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const sb = supabase.createClient('https://wzjxazdksgjrhjycocpw.supabase.co', 'sb_publishable_opqpZEV2qXCtyhZ8stvzvg_HRzKlicl');
 </script>
 </body>
 </html>
