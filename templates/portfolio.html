@@ -72,6 +72,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.08);}
 .nav-links a[aria-current="page"]{color:var(--gold);}
 .nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;transition:all 0.2s!important;}
+.logo-image{height:50px;width:auto;object-fit:contain;}
 .nav-cta:hover{background:var(--gold-light)!important;transform:translateY(-1px);}
 .nav-mobile-btn{display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:8px;}
 .hamburger{display:flex;flex-direction:column;gap:5px;}
@@ -244,11 +245,7 @@ footer{background:var(--black);padding:72px 0 32px;border-top:1px solid rgba(201
 <nav id="main-nav" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="L&J Marketing Kenya home">
-      <div class="nav-badge" aria-hidden="true"><div class="nav-monogram">L<span>&amp;</span>J</div></div>
-      <div class="nav-wordmark">
-        <div class="nav-name">L<span>&amp;</span>J Marketing Kenya</div>
-        <div class="nav-sub">Nairobi · Est. 2024</div>
-      </div>
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="logo-image">
     </a>
     <ul class="nav-links">
       <li><a href="index.html#services">Services</a></li>

@@ -31,6 +31,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 .nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
 .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.08);}
 .nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+.logo-image{height:50px;width:auto;object-fit:contain;}
 
 .account-page{padding:120px 0 60px;background:var(--offwhite);min-height:100vh;}
 .account-header{margin-bottom:40px;}
@@ -92,11 +93,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
-      <div>
-        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
-        <div class="nav-sub">Nairobi · Est. 2024</div>
-      </div>
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="logo-image">
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -145,7 +142,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 
         <div id="no-subscription">
           <p style="margin-bottom:24px;color:var(--muted);font-size:14px;">Join Nairobi's most practical marketing community. Get weekly tips, live Q&A sessions, and exclusive resources.</p>
-          <a href="shop.html#membership" class="btn-primary">Join Inner Circle →</a>
+          <button onclick="window.location.href='shop.html#membership'" class="btn-primary">Join Inner Circle →</button>
         </div>
 
         <div id="active-subscription" style="display:none;">
@@ -157,6 +154,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
             <div class="sub-detail">
               <span class="sub-detail-label">Price</span>
               <span class="sub-detail-value">KES 1,000/month</span>
+            </div>
+            <div class="sub-detail">
+              <span class="sub-detail-label">Trial Ends</span>
+              <span class="sub-detail-value" id="trial-end">-</span>
             </div>
             <div class="sub-detail">
               <span class="sub-detail-label">Next Billing</span>
@@ -171,7 +172,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
             <div class="sub-feature">Private community access</div>
             <div class="sub-feature">Exclusive member discounts</div>
           </div>
-          <button class="btn-outline" onclick="window.location.href='https://wa.me/254740788160?text=Hi%20I%27d%20like%20to%20cancel%20my%20Inner%20Circle%20membership'">Cancel Subscription</button>
+          <button class="btn-outline" onclick="cancelSubscription()">Cancel Subscription</button>
+        </div>
+      </div>
+
+      <div class="subscription-card">
+        <div class="sub-header">
+          <h2 class="sub-title">Purchased Products</h2>
+        </div>
+        <div id="purchased-products">
+          <p style="color:var(--muted);font-size:14px;">Loading your purchases...</p>
         </div>
       </div>
     </div>
@@ -181,8 +191,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 <a href="https://wa.me/254740788160" class="wa-float" target="_blank">💬</a>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
   const sb = supabase.createClient('https://wzjxazdksgjrhjycocpw.supabase.co', 'sb_publishable_opqpZEV2qXCtyhZ8stvzvg_HRzKlicl');
+  
+  // Paystack configuration
+  const PAYSTACK_PUBLIC_KEY = 'pk_live_2f12fa0e5f2be3a5e8892ec26bc1fe9c8c948496'; // Live key
+  const SUBSCRIPTION_PLAN_CODE = 'PLN_wrjgnfluqygwv24'; // Paystack plan code for PAID subscription
 
   async function loadAccount() {
     const loading = document.getElementById('loading');
@@ -208,21 +223,253 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
     document.getElementById('avatar-initials').textContent = user.email.substring(0, 2).toUpperCase();
     document.getElementById('joined-date').textContent = new Date(user.created_at).getFullYear();
 
-    const { data: sub } = await sb.from('subscriptions').select('*').single();
+    // Load subscription data with new schema
+    const { data: sub } = await sb.from('subscriptions').select('*').eq('user_id', user.id).single();
 
-    if (sub && sub.status === 'active') {
-      document.getElementById('sub-status').textContent = 'Active';
-      document.getElementById('sub-status').className = 'sub-status active';
-      document.getElementById('no-subscription').style.display = 'none';
-      document.getElementById('active-subscription').style.display = 'block';
-      
-      if (sub.next_billing) {
-        document.getElementById('next-billing').textContent = new Date(sub.next_billing).toLocaleDateString('en-KE', { month: 'long', day: 'numeric', year: 'numeric' });
+    if (sub) {
+      const now = new Date();
+      let statusText = '';
+      let statusClass = '';
+
+      // Check if subscription is active
+      if (sub.status === 'active') {
+        statusText = 'Active';
+        statusClass = 'active';
+        document.getElementById('no-subscription').style.display = 'none';
+        document.getElementById('active-subscription').style.display = 'block';
+        
+        if (sub.current_period_end) {
+          document.getElementById('next-billing').textContent = new Date(sub.current_period_end).toLocaleDateString('en-KE', { month: 'long', day: 'numeric', year: 'numeric' });
+        }
       }
+      // Check if trial is still valid
+      else if (sub.status === 'trialing' && sub.trial_ends_at) {
+        const trialEnd = new Date(sub.trial_ends_at);
+        if (trialEnd > now) {
+          statusText = 'Free Trial';
+          statusClass = 'active';
+          document.getElementById('no-subscription').style.display = 'none';
+          document.getElementById('active-subscription').style.display = 'block';
+          document.getElementById('trial-end').textContent = trialEnd.toLocaleDateString('en-KE', { month: 'long', day: 'numeric', year: 'numeric' });
+          
+          // Show upgrade button if trial is ending soon (less than 7 days)
+          const daysLeft = Math.ceil((trialEnd - now) / (1000 * 60 * 60 * 24));
+          if (daysLeft <= 7) {
+            const upgradeBtn = document.createElement('button');
+            upgradeBtn.className = 'btn-primary';
+            upgradeBtn.style.marginTop = '16px';
+            upgradeBtn.style.width = '100%';
+            upgradeBtn.textContent = `⚡ Upgrade to Paid (Trial ends in ${daysLeft} days)`;
+            upgradeBtn.onclick = () => activatePaidSubscription();
+            document.getElementById('active-subscription').appendChild(upgradeBtn);
+          }
+        } else {
+          // Trial has ended - mark as expired
+          statusText = 'Trial Ended';
+          statusClass = 'inactive';
+          document.getElementById('no-subscription').style.display = 'none';
+          document.getElementById('active-subscription').style.display = 'block';
+          document.getElementById('trial-end').textContent = 'Trial ended';
+          document.getElementById('sub-status').textContent = 'Trial Ended';
+          document.getElementById('sub-status').className = 'sub-status inactive';
+          
+          // Show upgrade button
+          const upgradeBtn = document.createElement('button');
+          upgradeBtn.className = 'btn-primary';
+          upgradeBtn.style.marginTop = '16px';
+          upgradeBtn.style.width = '100%';
+          upgradeBtn.textContent = '⚡ Upgrade to Paid Subscription';
+          upgradeBtn.onclick = () => activatePaidSubscription();
+          document.getElementById('active-subscription').appendChild(upgradeBtn);
+        }
+      }
+      // Subscription is canceled or expired
+      else if (sub.status === 'canceled' || sub.status === 'past_due' || sub.status === 'expired') {
+        statusText = sub.status.charAt(0).toUpperCase() + sub.status.slice(1);
+        statusClass = 'inactive';
+        document.getElementById('no-subscription').style.display = 'none';
+        document.getElementById('active-subscription').style.display = 'block';
+        document.getElementById('sub-status').textContent = statusText;
+        document.getElementById('sub-status').className = 'sub-status inactive';
+        
+        // Show upgrade button
+        const upgradeBtn = document.createElement('button');
+        upgradeBtn.className = 'btn-primary';
+        upgradeBtn.style.marginTop = '16px';
+        upgradeBtn.style.width = '100%';
+        upgradeBtn.textContent = '⚡ Reactivate Subscription';
+        upgradeBtn.onclick = () => activatePaidSubscription();
+        document.getElementById('active-subscription').appendChild(upgradeBtn);
+      }
+
+      if (statusText && !document.getElementById('sub-status').textContent) {
+        document.getElementById('sub-status').textContent = statusText;
+        document.getElementById('sub-status').className = `sub-status ${statusClass}`;
+      }
+    }
+
+    // Load purchased products
+    const { data: purchases } = await sb.from('product_purchases').select('*').eq('user_id', user.id);
+    
+    const productsContainer = document.getElementById('purchased-products');
+    if (purchases && purchases.length > 0) {
+      productsContainer.innerHTML = purchases.map(p => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--offwhite);border-radius:8px;margin-bottom:8px;">
+          <div>
+            <div style="font-weight:600;color:var(--navy);">${p.product_name}</div>
+            <div style="font-size:12px;color:var(--muted);">Purchased on ${new Date(p.purchase_date).toLocaleDateString('en-KE')}</div>
+          </div>
+          ${p.access_granted ? 
+            `<button onclick="downloadProduct('${p.product_id}', '${p.product_name.replace(/'/g, "\\'")}')" style="background:var(--gold);color:var(--navy);border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px;">📥 Download</button>` :
+            `<span style="color:var(--red);font-size:12px;font-weight:600;">✗ Access Revoked</span>`
+          }
+        </div>
+      `).join('');
+    } else {
+      productsContainer.innerHTML = '<p style="color:var(--muted);font-size:14px;">No products purchased yet. <a href="shop.html" style="color:var(--gold);font-weight:600;">Browse products →</a></p>';
     }
 
     loading.style.display = 'none';
     content.style.display = 'grid';
+  }
+
+  async function downloadProduct(productId, productName) {
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) {
+      alert('Please login to download products');
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // Check if user has access to this product
+    const { data: purchase } = await sb
+      .from('product_purchases')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('product_id', productId)
+      .single();
+
+    if (!purchase || !purchase.access_granted) {
+      alert('You do not have access to this product. Please purchase it first.');
+      window.location.href = 'shop.html';
+      return;
+    }
+
+    // Call Edge Function to get download link
+    try {
+      const response = await fetch('https://wzjxazdksgjrhjycocpw.supabase.co/functions/v1/download-product', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${sb.auth.session()?.access_token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productId })
+      });
+
+      const data = await response.json();
+
+      if (data.downloadUrl) {
+        // Open download link in new tab
+        window.open(data.downloadUrl, '_blank');
+      } else {
+        alert('Error getting download link. Please contact support.');
+      }
+    } catch (error) {
+      console.error('Download error:', error);
+      alert('Error downloading product. Please contact support.');
+    }
+  }
+
+  async function cancelSubscription() {
+    if (!confirm('Are you sure you want to cancel your subscription? You will lose access to all membership benefits.')) {
+      return;
+    }
+
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) return;
+
+    // Update subscription status in Supabase with new schema
+    const { error } = await sb
+      .from('subscriptions')
+      .update({ 
+        status: 'canceled'
+      })
+      .eq('user_id', user.id);
+
+    if (error) {
+      alert('Error cancelling subscription. Please contact support via WhatsApp.');
+      return;
+    }
+
+    alert('Subscription cancelled. You can re-subscribe anytime from the shop page.');
+    window.location.href = 'shop.html#membership';
+  }
+
+  async function activatePaidSubscription() {
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) {
+      alert('Please login to activate subscription');
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // Initialize Paystack subscription for paid plan
+    const handler = PaystackPop.setup({
+      key: PAYSTACK_PUBLIC_KEY,
+      email: user.email,
+      amount: 1000 * 100, // KES 1000 in cents/kobo
+      currency: 'KES',
+      plan: SUBSCRIPTION_PLAN_CODE,
+      ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+      metadata: {
+        custom_fields: [
+          {
+            display_name: "Subscription Type",
+            variable_name: "subscription_type",
+            value: "Inner Circle Membership - Paid"
+          }
+        ]
+      },
+      callback: function(response) {
+        // Payment successful - update subscription to active
+        verifyPaidSubscription(response.reference, user.id);
+      },
+      onClose: function() {
+        alert('Payment cancelled');
+      }
+    });
+
+    handler.openIframe();
+  }
+
+  async function verifyPaidSubscription(reference, userId) {
+    try {
+      // Calculate next billing date (1 month from now)
+      const nextBillingDate = new Date();
+      nextBillingDate.setMonth(nextBillingDate.getMonth() + 1);
+
+      // Update subscription to active with Paystack details
+      const { error: subscriptionError } = await sb
+        .from('subscriptions')
+        .update({
+          status: 'active',
+          paystack_customer_code: reference,
+          current_period_end: nextBillingDate.toISOString(),
+          trial_ends_at: null // Clear trial end date
+        })
+        .eq('user_id', userId);
+
+      if (subscriptionError) throw subscriptionError;
+
+      alert('Subscription activated! You are now a paid member.');
+      
+      // Reload account page to show updated status
+      loadAccount();
+
+    } catch (error) {
+      console.error('Subscription activation error:', error);
+      alert('Subscription activation failed. Please contact support.');
+    }
   }
 
   async function handleLogout() {

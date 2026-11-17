@@ -116,6 +116,15 @@ nav {
   transition: all 0.2s !important;
 }
 .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+.logo-image { height: 50px; width: auto; object-fit: contain; }
+.admin-dropdown { position: relative; }
+.admin-dropdown-btn { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+.admin-dropdown-btn::after { content: '▼'; font-size: 8px; margin-left: 4px; }
+.admin-menu { position: absolute; top: 100%; right: 0; background: var(--black); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; padding: 8px 0; min-width: 180px; display: none; z-index: 1001; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.admin-menu.show { display: block; }
+.admin-menu a { display: block; padding: 10px 16px; font-size: 12px; color: rgba(250,250,248,0.8); transition: all 0.2s; }
+.admin-menu a:hover { background: rgba(201,168,76,0.1); color: var(--gold); }
+.admin-menu .admin-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 8px 0; }
 .user-dropdown { position: relative; }
 .user-dropdown-btn { display: flex; align-items: center; gap: 4px; cursor: pointer; }
 .user-dropdown-btn::after { content: '▼'; font-size: 8px; margin-left: 4px; }
@@ -358,6 +367,16 @@ section { padding: 100px 0; }
   gap: 80px; align-items: center;
 }
 .about-badge-wrap { display: flex; justify-content: center; }
+.about-logo-image {
+  width: 240px;
+  height: 240px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  background: var(--navy);
+  padding: 20px;
+  box-shadow: 0 0 60px rgba(201,168,76,0.15), 0 20px 60px rgba(11,31,58,0.3);
+}
 .about-badge {
   width: 240px; height: 240px; border-radius: 50%;
   background: var(--navy);
@@ -653,6 +672,109 @@ section { padding: 100px 0; }
 .btn-navy:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(11,31,58,0.4); }
 
 /* ═══════════════════════════════════════
+   SUCCESS STORIES
+═══════════════════════════════════════ */
+.success-stories {
+  background: var(--offwhite);
+  padding: 100px 0;
+}
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+.story-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid var(--grey);
+  transition: all 0.3s;
+}
+.story-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(11,31,58,0.1);
+  border-color: rgba(201,168,76,0.3);
+}
+.story-client {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+  font-family: 'Cormorant Garamond', serif;
+}
+.story-industry {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.story-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.story-result {
+  background: var(--gold-pale);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* ═══════════════════════════════════════
+   CLIENT REVIEWS
+═══════════════════════════════════════ */
+.client-reviews {
+  background: var(--navy);
+  padding: 100px 0;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+.review-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid rgba(201,168,76,0.2);
+  transition: all 0.3s;
+}
+.review-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(201,168,76,0.4);
+}
+.review-stars {
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+.review-text {
+  font-size: 15px;
+  color: rgba(250,250,248,0.85);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.review-author {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.review-role {
+  font-size: 12px;
+  color: rgba(250,250,248,0.5);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════ */
 footer {
@@ -771,13 +893,7 @@ footer {
 <nav id="main-nav">
   <div class="nav-inner">
     <div class="nav-logo">
-      <div class="nav-badge">
-        <div class="nav-monogram">L<span>&</span>J</div>
-      </div>
-      <div class="nav-wordmark">
-        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
-        <div class="nav-sub">Nairobi · Est. 2024</div>
-      </div>
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="logo-image">
     </div>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
@@ -790,8 +906,9 @@ footer {
       <li class="user-dropdown" id="user-dropdown" style="display:none;">
         <span class="nav-cta user-dropdown-btn" onclick="toggleUserMenu()">Account ▼</span>
         <div class="user-menu" id="user-menu">
-          <a href="account.html" id="menu-profile">� View Profile</a>
-          <a href="admin.html" id="menu-admin" style="display:none;">� Add Products</a>
+          <a href="account.html">� View Profile</a>
+          <div class="user-divider" id="admin-menu-divider" style="display:none;"></div>
+          <a href="admin.html" id="admin-link" style="display:none;">� Add Products</a>
           <div class="user-divider"></div>
           <a href="#" onclick="handleLogout()">🚪 Logout</a>
         </div>
@@ -829,14 +946,14 @@ footer {
   <div class="hero-content">
     <div class="hero-eyebrow fade-up">
       <div class="eyebrow-line"></div>
-      <div class="eyebrow-text">Nairobi's AI-Powered Marketing Agency</div>
+      <div class="eyebrow-text">Nairobi's AI-Powered Marketing Agency || Number 1 Healthcare Marketing Agency in Kenya</div>
     </div>
 
     <h1 class="hero-h1 fade-up delay-1">We Don't Just Market.</h1>
     <p class="hero-h2 fade-up delay-2"><em>We Build Brands That Win.</em></p>
 
     <p class="hero-sub fade-up delay-3">
-      Strategy-led marketing for Kenyan businesses ready to grow. Social media, branding, websites, SEO, and digital advertising — powered by data, driven by results.
+      Strategy-led marketing for Kenyan businesses ready to grow. Social media, branding, websites, SEO, and digital advertising — powered by data, driven by results, Number 1 Healthcare Marketing Agency in Kenya.
     </p>
 
     <div class="hero-actions fade-up delay-4">
@@ -902,10 +1019,7 @@ footer {
   <div class="container">
     <div class="about-grid">
       <div class="about-badge-wrap">
-        <div class="about-badge">
-          <div class="about-lj">L<span>&</span>J</div>
-          <div class="about-agency">Marketing Kenya</div>
-        </div>
+        <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="about-logo-image">
       </div>
       <div class="about-text-side">
         <div class="section-tag">About L&J</div>
@@ -939,56 +1053,56 @@ footer {
         <span class="service-icon">🎯</span>
         <div class="service-name">Marketing Consultancy & Strategy</div>
         <div class="service-desc">Not sure where to start? We audit your current marketing, identify the gaps, and build a clear, prioritised strategy roadmap tailored to your Kenyan market.</div>
-        <div class="service-link">Learn More <span>→</span></div>
+        <a href="shop.html" class="service-link">Learn More <span>→</span></a>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
         <span class="service-icon">📱</span>
         <div class="service-name">Social Media Management</div>
         <div class="service-desc">We manage your Instagram, Facebook, LinkedIn, and TikTok — content creation, scheduling, community management, and monthly performance reporting.</div>
-        <div class="service-link">Learn More <span>→</span></div>
+        <a href="shop.html" class="service-link">Learn More <span>→</span></a>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
         <span class="service-icon">🌐</span>
         <div class="service-name">Website Design & Development</div>
         <div class="service-desc">Professional, fast-loading, mobile-first websites that convert visitors into clients. Built on WordPress with full SEO setup, M-Pesa integration, and ongoing support.</div>
-        <div class="service-link">Learn More <span>→</span></div>
+        <a href="shop.html" class="service-link">Learn More <span>→</span></a>
       </div>
       <div class="service-card">
         <div class="service-num">04</div>
         <span class="service-icon">🎨</span>
         <div class="service-name">Branding & Visual Identity</div>
         <div class="service-desc">Logo design, brand guidelines, colour palettes, typography, and brand messaging. We build identities that stand out in Nairobi's competitive market.</div>
-        <div class="service-link">Learn More <span>→</span></div>
+        <a href="shop.html" class="service-link">Learn More <span>→</span></a>
       </div>
       <div class="service-card">
         <div class="service-num">05</div>
         <span class="service-icon">🔍</span>
         <div class="service-name">SEO & Digital Marketing</div>
         <div class="service-desc">Rank higher on Google for Nairobi and Kenya searches. Keyword strategy, on-page optimisation, Google Business Profile management, and monthly rankings reports.</div>
-        <div class="service-link">Learn More <span>→</span></div>
+        <a href="shop.html" class="service-link">Learn More <span>→</span></a>
       </div>
       <div class="service-card">
         <div class="service-num">06</div>
         <span class="service-icon">✍️</span>
         <div class="service-name">Content Creation & Copywriting</div>
         <div class="service-desc">Blog posts, website copy, email newsletters, WhatsApp broadcasts, and LinkedIn articles. Strategy-led content that builds authority and drives action.</div>
-        <div class="service-link">Learn More <span>→</span></div>
+        <a href="shop.html" class="service-link">Learn More <span>→</span></a>
       </div>
       <div class="service-card">
         <div class="service-num">07</div>
         <span class="service-icon">📊</span>
         <div class="service-name">Google Ads & Paid Social</div>
         <div class="service-desc">ROI-focused advertising on Google, Facebook, and Instagram. We manage your budget to maximise leads and sales — not just clicks and impressions.</div>
-        <div class="service-link">Learn More <span>→</span></div>
+        <a href="shop.html" class="service-link">Learn More <span>→</span></a>
       </div>
       <div class="service-card">
         <div class="service-num">08</div>
         <span class="service-icon">🏫</span>
         <div class="service-name">Corporate Marketing Training</div>
         <div class="service-desc">In-house digital marketing workshops for your team. Half-day and full-day sessions covering social media, SEO, content, and AI tools — delivered in Nairobi.</div>
-        <div class="service-link">Learn More <span>→</span></div>
+        <a href="shop.html" class="service-link">Learn More <span>→</span></a>
       </div>
     </div>
   </div>
@@ -1051,6 +1165,30 @@ footer {
           <div class="review-author">— Business Owner, Nairobi</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SUCCESS STORIES ── -->
+<section class="success-stories">
+  <div class="container">
+    <div class="section-tag">Our Work</div>
+    <h2 class="section-h">Success Stories<br><em class="gold">Real Results.</em></h2>
+    <p class="section-sub">See how we've helped businesses across Kenya grow their brand and reach more customers.</p>
+    <div class="stories-grid" id="stories-grid">
+      <!-- Stories loaded dynamically from Supabase -->
+    </div>
+  </div>
+</section>
+
+<!-- ── CLIENT REVIEWS ── -->
+<section class="client-reviews">
+  <div class="container">
+    <div class="section-tag inv">What Clients Say</div>
+    <h2 class="section-h inv">Trusted by<br><em class="gold">Kenyan Businesses.</em></h2>
+    <p class="section-sub inv">Don't just take our word for it — hear from the businesses we've helped grow.</p>
+    <div class="reviews-grid" id="reviews-grid">
+      <!-- Reviews loaded dynamically from Supabase -->
     </div>
   </div>
 </section>
@@ -1149,8 +1287,8 @@ footer {
         <div class="product-body">
           <div class="product-desc">Monthly marketing tips, templates, live Q&A sessions, and a private community of Kenyan business owners.</div>
           <div class="product-footer">
-            <div class="product-price">KES 2,500/mo</div>
-            <button class="product-btn" onclick="window.open('shop.html','_self')">Join Now</button>
+            <div class="product-price">KES 1,000/mo</div>
+            <button class="product-btn" onclick="window.open('shop.html#membership','_self')">Join Now</button>
           </div>
         </div>
       </div>
@@ -1216,8 +1354,9 @@ footer {
         <div class="footer-tagline">We Don't Just Market. We Build Brands That Win.</div>
         <div class="footer-desc">Nairobi's results-driven marketing agency. Strategy-led branding, social media, websites, SEO, and digital marketing for Kenyan businesses ready to grow.</div>
         <div class="footer-contact-item"><span>📍</span><span>KMA Centre, Upperhill, Nairobi, Kenya</span></div>
-        <div class="footer-contact-item"><span>📞</span><span>0740 788 160</span></div>
-        <div class="footer-contact-item"><span>📧</span><span>hello@ljmarketingkenya.co.ke</span></div>
+        <div class="footer-contact-item"><span>📍</span><span>Opulent Oasis Building 1st Floor Juja, Nairobi, Kenya</span></div>
+        <div class="footer-contact-item"><span>📞</span><span>0740 788 160 / 0748 368 434</span></div>
+        <div class="footer-contact-item"><span>📧</span><span>ljmarketingagencykenya@gmail.com</span></div>
         <div class="footer-socials">
           <a href="#" class="social-btn" aria-label="Instagram">📸</a>
           <a href="#" class="social-btn" aria-label="Facebook">👍</a>
@@ -1319,6 +1458,109 @@ document.querySelectorAll('.service-card, .testimonial, .process-step, .product-
   observer.observe(el);
 });
 
+// Load success stories and reviews
+async function loadSuccessStories() {
+  try {
+    const { data: stories, error } = await sb.from('success_stories').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    
+    const grid = document.getElementById('stories-grid');
+    if (stories && stories.length > 0) {
+      grid.innerHTML = stories.map(story => `
+        <div class="story-card">
+          <div class="story-client">${story.client_name}</div>
+          <div class="story-industry">${story.industry}</div>
+          <div class="story-desc">${story.description}</div>
+          <div class="story-result">📈 ${story.result}</div>
+        </div>
+      `).join('');
+    } else {
+      // Fallback to static stories if no data
+      grid.innerHTML = `
+        <div class="story-card">
+          <div class="story-client">Geovince Security</div>
+          <div class="story-industry">Security Services</div>
+          <div class="story-desc">Complete rebranding and digital marketing overhaul including website development, social media management, and Google Business Profile optimization.</div>
+          <div class="story-result">📈 300% increase in online enquiries within 3 months</div>
+        </div>
+        <div class="story-card">
+          <div class="story-client">RoyalMark Graphic and IT Expert</div>
+          <div class="story-industry">IT & Design</div>
+          <div class="story-desc">Strategic marketing consulting and social media campaign management to increase brand visibility and attract new clients.</div>
+          <div class="story-result">📈 250% growth in social media following and client base</div>
+        </div>
+        <div class="story-card">
+          <div class="story-client">Mulemi Maternity and Nursing Home</div>
+          <div class="story-industry">Healthcare</div>
+          <div class="story-desc">Website development, SEO optimization, and Google Ads campaign to reach expectant mothers in the local area.</div>
+          <div class="story-result">📈 400% increase in appointment bookings via online channels</div>
+        </div>
+        <div class="story-card">
+          <div class="story-client">Pathcare Kenya Laboratory</div>
+          <div class="story-industry">Medical Laboratory</div>
+          <div class="story-desc">Digital marketing strategy, social media management, and online reputation management to build trust with patients.</div>
+          <div class="story-result">📈 200% increase in patient referrals and online reviews</div>
+        </div>
+        <div class="story-card">
+          <div class="story-client">Pathtest Diagnostics</div>
+          <div class="story-industry">Diagnostics</div>
+          <div class="story-desc">Comprehensive digital marketing including website, Google Business Profile, and targeted social media campaigns.</div>
+          <div class="story-result">📈 350% growth in online visibility and test bookings</div>
+        </div>
+      `;
+    }
+  } catch (err) {
+    console.error('Error loading success stories:', err);
+  }
+}
+
+async function loadClientReviews() {
+  try {
+    const { data: reviews, error } = await sb.from('client_reviews').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    
+    const grid = document.getElementById('reviews-grid');
+    if (reviews && reviews.length > 0) {
+      grid.innerHTML = reviews.map(review => `
+        <div class="review-card">
+          <div class="review-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+          <div class="review-text">"${review.comment}"</div>
+          <div class="review-author">${review.client_name}</div>
+          <div class="review-role">${review.client_role}</div>
+        </div>
+      `).join('');
+    } else {
+      // Fallback to static reviews if no data
+      grid.innerHTML = `
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"L&J Marketing completely transformed our online presence. Our Instagram following grew by 400% in three months and we're getting daily enquiries from clients who found us online."</div>
+          <div class="review-author">Wanjiku M.</div>
+          <div class="review-role">Restaurant Owner, Kilimani, Nairobi</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Professional, reliable, and they actually understand Kenyan business. They built our website in two weeks and we started getting calls from Google within the first month."</div>
+          <div class="review-author">James O.</div>
+          <div class="review-role">Real Estate Developer, Westlands</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"The branding package was worth every shilling. Our brand now looks premium and consistent across all platforms. We've had clients say they chose us because of how professional we look online."</div>
+          <div class="review-author">Dr. Amina K.</div>
+          <div class="review-role">Medical Clinic, Upperhill</div>
+        </div>
+      `;
+    }
+  } catch (err) {
+    console.error('Error loading client reviews:', err);
+  }
+}
+
+// Load content on page load
+loadSuccessStories();
+loadClientReviews();
+
 async function handleLogout() {
   await sb.auth.signOut();
   window.location.href = 'login.html';
@@ -1348,7 +1590,8 @@ async function checkUserRole() {
     document.getElementById('login-link').style.display = 'none';
     
     if (profile && profile.role === 'admin') {
-      document.getElementById('menu-admin').style.display = 'block';
+      document.getElementById('admin-menu-divider').style.display = 'block';
+      document.getElementById('admin-link').style.display = 'block';
     }
   }
 }

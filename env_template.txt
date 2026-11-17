@@ -1,0 +1,21 @@
+# Copy this file to .env and fill in your actual values
+# DO NOT commit .env to GitHub
+
+# Supabase Configuration
+SUPABASE_URL=https://wzjxazdksgjrhjycocpw.supabase.co
+SUPABASE_ANON_KEY=sb_publishable_opqpZEV2qXCtyhZ8stvzvg_HRzKlicl
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
+
+# Paystack Configuration
+PAYSTACK_PUBLIC_KEY=pk_live_2f12fa0e5f2be3a5e8892ec26bc1fe9c8c948496
+PAYSTACK_SECRET_KEY=sk_live_2f12fa0e5f2be3a5e8892ec26bc1fe9c8c948496
+
+# Paystack Subscription Plan
+PAYSTACK_PLAN_CODE=PLN_wrjgnfluqygwv24
+
+# Email Configuration (Resend)
+RESEND_API_KEY=your_resend_api_key_here
+RESEND_FROM_EMAIL=noreply@ljmarketingkenya.co.ke
+
+# WhatsApp
+WHATSAPP_NUMBER=254740788160

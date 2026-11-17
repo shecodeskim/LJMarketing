@@ -27,18 +27,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 .nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);}
 .nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+.logo-image{height:50px;width:auto;object-fit:contain;}
 .nav-icons{display:flex;align-items:center;gap:12px;}
 .nav-icon-btn{position:relative;background:none;border:none;color:rgba(250,250,248,0.65);cursor:pointer;padding:8px;font-size:18px;transition:color 0.2s;}
 .nav-icon-btn:hover{color:var(--gold);}
 .cart-badge{position:absolute;top:4px;right:4px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center;}
-.admin-dropdown{position:relative;}
-.admin-dropdown-btn{display:flex;align-items:center;gap:4px;cursor:pointer;}
-.admin-dropdown-btn::after{content:'▼';font-size:8px;margin-left:4px;}
-.admin-menu{position:absolute;top:100%;right:0;background:var(--black);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:8px 0;min-width:180px;display:none;z-index:1001;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
-.admin-menu.show{display:block;}
-.admin-menu a{display:block;padding:10px 16px;font-size:12px;color:rgba(250,250,248,0.8);transition:all 0.2s;}
-.admin-menu a:hover{background:rgba(201,168,76,0.1);color:var(--gold);}
-.admin-menu .admin-divider{height:1px;background:rgba(255,255,255,0.1);margin:8px 0;}
+.user-dropdown{position:relative;}
+.user-dropdown-btn{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.user-dropdown-btn::after{content:'▼';font-size:8px;margin-left:4px;}
+.user-menu{position:absolute;top:100%;right:0;background:var(--black);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:8px 0;min-width:180px;display:none;z-index:1001;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.user-menu.show{display:block;}
+.user-menu a{display:block;padding:10px 16px;font-size:12px;color:rgba(250,250,248,0.8);transition:all 0.2s;}
+.user-menu a:hover{background:rgba(201,168,76,0.1);color:var(--gold);}
+.user-menu .user-divider{height:1px;background:rgba(255,255,255,0.1);margin:8px 0;}
 
 .page-header{background:var(--navy);padding:140px 0 80px;position:relative;overflow:hidden;}
 .page-header::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 70%);}
@@ -95,26 +96,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
-      <div>
-        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
-        <div class="nav-sub">Nairobi · Est. 2024</div>
-      </div>
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="logo-image">
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="shop.html">Shop</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li class="admin-dropdown" id="admin-dropdown" style="display:none;">
-        <span class="nav-cta admin-dropdown-btn" onclick="toggleAdminMenu()">Admin ▼</span>
-        <div class="admin-menu" id="admin-menu">
-          <a href="admin.html">📦 Add Products</a>
-          <a href="account.html">👤 My Account</a>
-          <div class="admin-divider"></div>
+      <li class="user-dropdown" id="user-dropdown" style="display:none;">
+        <span class="nav-cta user-dropdown-btn" onclick="toggleUserMenu()">Account ▼</span>
+        <div class="user-menu" id="user-menu">
+          <a href="account.html">� View Profile</a>
+          <div class="user-divider" id="admin-menu-divider" style="display:none;"></div>
+          <a href="admin.html" id="admin-link" style="display:none;">� Add Products</a>
+          <div class="user-divider"></div>
           <a href="#" onclick="handleLogout()">🚪 Logout</a>
         </div>
       </li>
-      <li id="customer-logout" style="display:none;"><a href="#" onclick="handleLogout()" class="nav-cta">Logout</a></li>
+      <li id="login-link"><a href="login.html" class="nav-cta">Login</a></li>
     </ul>
     <div class="nav-icons">
       <button class="nav-icon-btn" onclick="window.location.href='wishlist.html'" title="Wishlist">♡</button>
@@ -170,9 +168,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 <a href="https://wa.me/254740788160" class="wa-float" target="_blank">💬</a>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
   const sb = supabase.createClient('https://wzjxazdksgjrhjycocpw.supabase.co', 'sb_publishable_opqpZEV2qXCtyhZ8stvzvg_HRzKlicl');
-
+  
+  // Paystack configuration
+  const PAYSTACK_PUBLIC_KEY = 'pk_live_2f12fa0e5f2be3a5e8892ec26bc1fe9c8c948496'; // Live key
+  // const PAYSTACK_PUBLIC_KEY = 'pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // Live key
+   const SUBSCRIPTION_PLAN_CODE = 'PLN_wrjgnfluqygwv24'; // Replace with your Paystack plan code
   let products = {};
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -232,29 +235,142 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
     renderCart();
   }
 
-  function checkout() {
-    const { data: { user } } = sb.auth.getUser();
+  async function checkout() {
+    const { data: { user } } = await sb.auth.getUser();
     if (!user) {
       alert('Please login to checkout');
       window.location.href = 'login.html';
       return;
     }
-    alert('Checkout functionality will be integrated with M-Pesa payment. For now, please contact us via WhatsApp to complete your order.');
-    window.location.href = 'https://wa.me/254740788160?text=Hi%20I%27d%20like%20to%20purchase%20items%20from%20my%20cart';
+
+    if (cart.length === 0) {
+      alert('Your cart is empty');
+      return;
+    }
+
+    // Calculate total
+    let total = 0;
+    const productNames = [];
+    cart.forEach(item => {
+      total += item.price;
+      productNames.push(item.name);
+    });
+
+    // Check if any products are already purchased
+    const { data: existingPurchases } = await sb
+      .from('product_purchases')
+      .select('product_id')
+      .eq('user_id', user.id);
+
+    const purchasedIds = existingPurchases ? existingPurchases.map(p => p.product_id) : [];
+    const unpurchasedItems = cart.filter(item => !purchasedIds.includes(item.id));
+
+    if (unpurchasedItems.length === 0) {
+      alert('You already own all items in your cart');
+      return;
+    }
+
+    // Initialize Paystack payment for cart
+    const handler = PaystackPop.setup({
+      key: PAYSTACK_PUBLIC_KEY,
+      email: user.email,
+      amount: total * 100, // Paystack expects amount in cents/kobo
+      currency: 'KES',
+      ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+      metadata: {
+        custom_fields: [
+          {
+            display_name: "Items",
+            variable_name: "items",
+            value: productNames.join(', ')
+          }
+        ]
+      },
+      callback: function(response) {
+        // Payment successful - verify and grant access for all items
+        verifyCartPayment(response.reference, unpurchasedItems, total, user.id);
+      },
+      onClose: function() {
+        showToast('Payment cancelled');
+      }
+    });
+
+    handler.openIframe();
+  }
+
+  async function verifyCartPayment(reference, items, total, userId) {
+    try {
+      // Record payment in Supabase
+      const { data: payment, error: paymentError } = await sb
+        .from('payments')
+        .insert({
+          user_id: userId,
+          reference: reference,
+          amount_kes: total,
+          channel: 'mpesa',
+          status: 'success'
+        })
+        .select()
+        .single();
+
+      if (paymentError) throw paymentError;
+
+      // Grant access for all items
+      for (const item of items) {
+        const { error: purchaseError } = await sb
+          .from('product_purchases')
+          .insert({
+            user_id: userId,
+            product_id: item.id,
+            product_name: item.name,
+            payment_id: payment.id,
+            access_granted: true
+          });
+
+        if (purchaseError) {
+          console.error('Error granting access for item:', item.name, purchaseError);
+        }
+      }
+
+      // Clear cart
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+
+      alert('Payment successful! All products added to your account');
+      
+      // Redirect to account page
+      setTimeout(() => {
+        window.location.href = 'account.html';
+      }, 2000);
+
+    } catch (error) {
+      console.error('Payment verification error:', error);
+      alert('Payment verification failed. Please contact support.');
+    }
+  }
+
+  function showToast(message) {
+    // Simple toast notification
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--navy);color:var(--gold);padding:16px 24px;border-radius:8px;z-index:2000;font-size:14px;font-weight:600;';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
   }
 
   loadProducts();
 
-function toggleAdminMenu() {
-  const menu = document.getElementById('admin-menu');
+function toggleUserMenu() {
+  const menu = document.getElementById('user-menu');
   menu.classList.toggle('show');
 }
 
 // Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
-  const dropdown = document.getElementById('admin-dropdown');
+  const dropdown = document.getElementById('user-dropdown');
   if (dropdown && !dropdown.contains(e.target)) {
-    document.getElementById('admin-menu').classList.remove('show');
+    document.getElementById('user-menu').classList.remove('show');
   }
 });
 
@@ -265,10 +381,12 @@ async function checkUserRole() {
   if (user) {
     const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
     
+    document.getElementById('user-dropdown').style.display = 'block';
+    document.getElementById('login-link').style.display = 'none';
+    
     if (profile && profile.role === 'admin') {
-      document.getElementById('admin-dropdown').style.display = 'block';
-    } else {
-      document.getElementById('customer-logout').style.display = 'block';
+      document.getElementById('admin-menu-divider').style.display = 'block';
+      document.getElementById('admin-link').style.display = 'block';
     }
   }
 }

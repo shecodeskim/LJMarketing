@@ -55,6 +55,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 .nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);}
 .nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+.logo-image{height:50px;width:auto;object-fit:contain;}
 .nav-icons{display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .nav-icon-btn{position:relative;background:none;border:none;color:rgba(250,250,248,0.65);cursor:pointer;padding:8px;font-size:18px;transition:color 0.2s;}
 .nav-icon-btn:hover{color:var(--gold);}
@@ -66,6 +67,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 .admin-menu a{display:block;padding:10px 16px;font-size:12px;color:rgba(250,250,248,0.8);transition:all 0.2s;}
 .admin-menu a:hover{background:rgba(201,168,76,0.1);color:var(--gold);}
 .admin-menu .admin-divider{height:1px;background:rgba(255,255,255,0.1);margin:6px 0;}
+.user-dropdown{position:relative;}
+.user-dropdown-btn{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.user-dropdown-btn::after{content:'▼';font-size:8px;margin-left:4px;}
+.user-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--black);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:6px 0;min-width:180px;display:none;z-index:1001;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.user-menu.show{display:block;}
+.user-menu a{display:block;padding:10px 16px;font-size:12px;color:rgba(250,250,248,0.8);transition:all 0.2s;}
+.user-menu a:hover{background:rgba(201,168,76,0.1);color:var(--gold);}
+.user-menu .user-divider{height:1px;background:rgba(255,255,255,0.1);margin:6px 0;}
 .nav-mobile-btn{display:none;background:none;border:none;color:var(--white);cursor:pointer;padding:8px;}
 .hamburger{display:flex;flex-direction:column;gap:5px;}
 .hamburger span{display:block;width:22px;height:2px;background:var(--gold);border-radius:2px;}
@@ -206,11 +215,7 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
 <nav id="main-nav" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="L&J Marketing Kenya home">
-      <div class="nav-badge" aria-hidden="true"><div class="nav-monogram">L<span>&amp;</span>J</div></div>
-      <div>
-        <div class="nav-name">L<span>&amp;</span>J Marketing Kenya</div>
-        <div class="nav-sub">Nairobi · Est. 2024</div>
-      </div>
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="logo-image">
     </a>
     <ul class="nav-links">
       <li><a href="index.html#services">Services</a></li>
@@ -220,16 +225,17 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
       <li><a href="blog.html">Blog</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="contact.html#book" class="nav-cta">Book Free Call</a></li>
-      <li class="admin-dropdown" id="admin-dropdown" style="display:none;">
-        <span class="nav-cta admin-dropdown-btn" onclick="toggleAdminMenu(event)" role="button" tabindex="0">Admin</span>
-        <div class="admin-menu" id="admin-menu">
-          <a href="admin.html">📦 Add Products</a>
-          <a href="account.html">👤 My Account</a>
-          <div class="admin-divider"></div>
+      <li class="user-dropdown" id="user-dropdown" style="display:none;">
+        <span class="nav-cta user-dropdown-btn" onclick="toggleUserMenu(event)" role="button" tabindex="0">Account ▼</span>
+        <div class="user-menu" id="user-menu">
+          <a href="account.html">� View Profile</a>
+          <div class="user-divider" id="admin-menu-divider" style="display:none;"></div>
+          <a href="admin.html" id="admin-link" style="display:none;">� Add Products</a>
+          <div class="user-divider"></div>
           <a href="#" onclick="handleLogout(event)">🚪 Logout</a>
         </div>
       </li>
-      <li id="customer-logout" style="display:none;"><a href="#" onclick="handleLogout(event)" class="nav-cta">Logout</a></li>
+      <li id="login-link"><a href="login.html" class="nav-cta">Login</a></li>
     </ul>
     <div class="nav-icons">
       <button class="nav-icon-btn" onclick="window.location.href='wishlist.html'" title="Wishlist" aria-label="Wishlist">♡</button>
@@ -302,8 +308,7 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
       <div class="mb-price-box">
         <div class="mb-price">KES<br>1,000/mo</div>
         <div class="mb-period">First month free · cancel anytime</div>
-        <!-- ⚠️ EDIT: Point to your signup.html or Selar free-trial link -->
-        <a href="signup.html" class="mb-btn">Join Inner Circle →</a>
+        <span class = "plain-link-text">Join Inner Circle by Subscribing to the L&J Marketing Inner Circle Membership and Social Media Auditing Plan</span>
         <div class="mb-note">📱 Pay via M-Pesa</div>
       </div>
     </div>
@@ -374,7 +379,10 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
 <!-- 1. Supabase SDK (MUST load before any code that uses `sb`) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- 2. Initialize Supabase client -->
+<!-- 2. Paystack Inline JS -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<!-- 3. Initialize Supabase client -->
 <script>
   // ⚠️ EDIT THESE TWO VALUES if you rotate keys or move projects
   // You can find them in: Supabase Dashboard → Project Settings → API
@@ -540,8 +548,8 @@ function renderProducts(products) {
                       title="Add to wishlist"
                       aria-label="Toggle wishlist">${wishIcon}</button>
               <button class="buy-btn ${goldClass}" 
-                      onclick="addToCart('${safeId}', '${safeNameJs}', ${price})">
-                Add to Cart
+                      onclick="${safeNameJs.includes('Inner Circle') || safeNameJs.includes('Social Media Auditing') ? 'initiateSubscription()' : `initiatePayment('${safeId}', '${safeNameJs}', ${price})`}">
+                ${safeNameJs.includes('Inner Circle') || safeNameJs.includes('Social Media Auditing') ? 'Subscribe' : 'Buy Now'}
               </button>
             </div>
           </div>
@@ -614,15 +622,15 @@ function toggleMenu() {
   document.getElementById('mobile-nav').classList.toggle('open');
 }
 
-function toggleAdminMenu(e) {
+function toggleUserMenu(e) {
   if (e) e.stopPropagation();
-  document.getElementById('admin-menu').classList.toggle('show');
+  document.getElementById('user-menu').classList.toggle('show');
 }
 
-// Close admin dropdown on outside click
+// Close user dropdown on outside click
 document.addEventListener('click', (e) => {
-  const dropdown = document.getElementById('admin-dropdown');
-  const menu = document.getElementById('admin-menu');
+  const dropdown = document.getElementById('user-dropdown');
+  const menu = document.getElementById('user-menu');
   if (dropdown && menu && !dropdown.contains(e.target)) {
     menu.classList.remove('show');
   }
@@ -642,10 +650,12 @@ async function checkUserRole() {
       .eq('id', user.id)
       .single();
 
+    document.getElementById('user-dropdown').style.display = 'block';
+    document.getElementById('login-link').style.display = 'none';
+    
     if (profile && profile.role === 'admin') {
-      document.getElementById('admin-dropdown').style.display = 'block';
-    } else {
-      document.getElementById('customer-logout').style.display = 'block';
+      document.getElementById('admin-menu-divider').style.display = 'block';
+      document.getElementById('admin-link').style.display = 'block';
     }
   } catch (err) {
     // Silent — user is simply not logged in
@@ -657,6 +667,358 @@ async function handleLogout(e) {
   if (e) e.preventDefault();
   await sb.auth.signOut();
   window.location.href = 'login.html';
+}
+
+/* ═══════════════════════════════════════
+   PAYSTACK PAYMENT
+═══════════════════════════════════════ */
+// Paystack configuration - 
+const PAYSTACK_PUBLIC_KEY = 'pk_live_2f12fa0e5f2be3a5e8892ec26bc1fe9c8c948496'; // Live key
+const SUBSCRIPTION_PLAN_CODE = 'PLN_wrjgnfluqygwv24'; // Paystack plan code for PAID subscription (after trial)
+
+async function initiateSubscription() {
+  // Check if user is logged in
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) {
+    showToast('Please login to subscribe');
+    window.location.href = 'login.html';
+    return;
+  }
+
+  // Check if user already has an active subscription or trial
+  const { data: existingSubscription } = await sb
+    .from('subscriptions')
+    .select('*')
+    .eq('user_id', user.id)
+    .single();
+
+  if (existingSubscription && (existingSubscription.status === 'trialing' || existingSubscription.status === 'active')) {
+    showToast('You already have an active subscription or trial');
+    window.location.href = 'account.html';
+    return;
+  }
+
+  // Initialize Paystack payment to tokenize card (charge KES 1)
+  // This tiny charge is required to tokenize the card for future subscription
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: user.email,
+    amount: 1 * 100, // KES 1 in cents/kobo (tiny charge for tokenization)
+    currency: 'KES',
+    ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Transaction Type",
+          variable_name: "transaction_type",
+          value: "Card Tokenization for Free Trial"
+        }
+      ]
+    },
+    callback: function(response) {
+      // Payment successful - verify and get authorization codes
+      verifyTokenization(response.reference, user.id, user.email);
+    },
+    onClose: function() {
+      showToast('Subscription cancelled');
+    }
+  });
+
+  handler.openIframe();
+}
+
+async function verifyTokenization(reference, userId, email) {
+  try {
+    // Verify the transaction with Paystack to get customer code and authorization code
+    const verifyResponse = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer sk_live_e888276f0c3cfc9a5dc931b78ec8970539f406c8', // Live secret key
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const verifyData = await verifyResponse.json();
+
+    if (verifyData.status && verifyData.data) {
+      const customerCode = verifyData.data.customer.customer_code;
+      const authorizationCode = verifyData.data.authorization.authorization_code;
+
+      // Calculate trial end date (30 days from now)
+      const trialEndDate = new Date();
+      trialEndDate.setDate(trialEndDate.getDate() + 30);
+
+      // Record subscription in Supabase with trial status and authorization codes
+      const { error: subscriptionError } = await sb
+        .from('subscriptions')
+        .upsert({
+          user_id: userId,
+          status: 'trialing',
+          trial_ends_at: trialEndDate.toISOString(),
+          paystack_customer_code: customerCode,
+          paystack_authorization_code: authorization_code,
+          tokenization_reference: reference
+        }, {
+          onConflict: 'user_id'
+        });
+
+      if (subscriptionError) throw subscriptionError;
+
+      showToast('🎉 30-day free trial activated! Card tokenized. You will be billed KES 1,000/mo after trial ends.');
+      
+      // Redirect to account page
+      setTimeout(() => {
+        window.location.href = 'account.html';
+      }, 2000);
+    } else {
+      throw new Error('Transaction verification failed');
+    }
+
+  } catch (error) {
+    console.error('Tokenization verification error:', error);
+    showToast('Tokenization failed. Please contact support.');
+  }
+}
+
+// Check if user has active subscription or trial
+async function hasActiveSubscription(userId) {
+  const { data: subscription } = await sb
+    .from('subscriptions')
+    .select('*')
+    .eq('user_id', userId)
+    .single();
+
+  if (!subscription) return false;
+
+  // Check if subscription is active or in trial
+  if (subscription.status === 'active') return true;
+
+  // Check if trial is still valid
+  if (subscription.status === 'trialing' && subscription.trial_ends_at) {
+    const trialEnd = new Date(subscription.trial_ends_at);
+    const now = new Date();
+    return trialEnd > now;
+  }
+
+  return false;
+}
+
+async function activatePaidSubscription() {
+  // Check if user is logged in
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) {
+    showToast('Please login to activate subscription');
+    window.location.href = 'login.html';
+    return;
+  }
+
+  // Initialize Paystack subscription for paid plan
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: user.email,
+    amount: 1000 * 100, // KES 1000 in cents/kobo
+    currency: 'KES',
+    plan: SUBSCRIPTION_PLAN_CODE,
+    ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Subscription Type",
+          variable_name: "subscription_type",
+          value: "Inner Circle Membership - Paid"
+        }
+      ]
+    },
+    callback: function(response) {
+      // Payment successful - update subscription to active
+      verifyPaidSubscription(response.reference, user.id, user.email);
+    },
+    onClose: function() {
+      showToast('Payment cancelled');
+    }
+  });
+
+  handler.openIframe();
+}
+
+async function verifyPaidSubscription(reference, userId, email) {
+  try {
+    // Calculate next billing date (1 month from now)
+    const nextBillingDate = new Date();
+    nextBillingDate.setMonth(nextBillingDate.getMonth() + 1);
+
+    // Update subscription to active with Paystack details
+    const { error: subscriptionError } = await sb
+      .from('subscriptions')
+      .update({
+        status: 'active',
+        paystack_customer_code: reference,
+        current_period_end: nextBillingDate.toISOString(),
+        trial_ends_at: null // Clear trial end date
+      })
+      .eq('user_id', userId);
+
+    if (subscriptionError) throw subscriptionError;
+
+    showToast('Subscription activated! You are now a paid member.');
+    
+    // Redirect to account page
+    setTimeout(() => {
+      window.location.href = 'account.html';
+    }, 2000);
+
+  } catch (error) {
+    console.error('Subscription activation error:', error);
+    showToast('Subscription activation failed. Please contact support.');
+  }
+}
+
+async function initiatePayment(productId, productName, amount) {
+  // Check if user is logged in
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) {
+    showToast('Please login to purchase');
+    window.location.href = 'login.html';
+    return;
+  }
+
+  // Check if this is a subscription product
+  if (productName.includes('Inner Circle') || productName.includes('Social Media Auditing')) {
+    // Check if user already has active subscription
+    const hasActiveSub = await hasActiveSubscription(user.id);
+    if (hasActiveSub) {
+      showToast('You already have an active subscription');
+      window.location.href = 'account.html';
+      return;
+    }
+    // Redirect to subscription flow
+    initiateSubscription();
+    return;
+  }
+
+  // Check if user already purchased this product
+  const { data: existingPurchase } = await sb
+    .from('product_purchases')
+    .select('*')
+    .eq('user_id', user.id)
+    .eq('product_id', productId)
+    .single();
+
+  if (existingPurchase) {
+    showToast('You already own this product');
+    return;
+  }
+
+  // Initialize Paystack payment
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: user.email,
+    amount: amount * 100, // Paystack expects amount in kobo/cents
+    currency: 'KES',
+    ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Product ID",
+          variable_name: "product_id",
+          value: productId
+        },
+        {
+          display_name: "Product Name",
+          variable_name: "product_name",
+          value: productName
+        }
+      ]
+    },
+    callback: function(response) {
+      // Payment successful - verify and grant access
+      verifyPayment(response.reference, productId, productName, amount, user.id);
+    },
+    onClose: function() {
+      // Payment modal closed
+      showToast('Payment cancelled');
+    }
+  });
+
+  handler.openIframe();
+}
+
+async function verifyPayment(reference, productId, productName, amount, userId) {
+  try {
+    // Verify the transaction with Paystack
+    const verifyResponse = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer sk_live_e888276f0c3cfc9a5dc931b78ec8970539f406c8', // Live secret key
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const verifyData = await verifyResponse.json();
+
+    if (verifyData.status && verifyData.data.status === 'success') {
+      // Record payment in Supabase with new schema
+      const { data: payment, error: paymentError } = await sb
+        .from('payments')
+        .insert({
+          user_id: userId,
+          reference: reference,
+          amount_kes: amount,
+          channel: verifyData.data.channel || 'card',
+          status: 'success'
+        })
+        .select()
+        .single();
+
+      if (paymentError) throw paymentError;
+
+      // Grant product access
+      const { error: purchaseError } = await sb
+        .from('product_purchases')
+        .insert({
+          user_id: userId,
+          product_id: productId,
+          product_name: productName,
+          payment_id: payment.id,
+          access_granted: true
+        });
+
+      if (purchaseError) throw purchaseError;
+
+      // Call Edge Function to deliver product via email
+      const { data: { user } } = await sb.auth.getUser();
+      try {
+        await fetch('https://wzjxazdksgjrhjycocpw.supabase.co/functions/v1/deliver-product', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${sb.auth.session()?.access_token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userId: userId,
+            productId: productId,
+            productName: productName,
+            userEmail: user.email
+          })
+        });
+      } catch (emailError) {
+        console.log('Email delivery failed (non-critical):', emailError);
+      }
+
+      showToast('Payment successful! Product delivered to your email.');
+      
+      // Redirect to account page to view purchased products
+      setTimeout(() => {
+        window.location.href = 'account.html';
+      }, 2000);
+    } else {
+      throw new Error('Payment verification failed');
+    }
+
+  } catch (error) {
+    console.error('Payment verification error:', error);
+    showToast('Payment verification failed. Please contact support.');
+  }
 }
 
 /* ═══════════════════════════════════════

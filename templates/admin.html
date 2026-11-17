@@ -7,7 +7,7 @@
 <title>Admin Dashboard | L&J Marketing Kenya</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0B1F3A;--navy-mid:#142A4E;--gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#F5E9C8;--black:#080C12;--white:#FAFAF8;--offwhite:#F2F0EB;--grey:#E5E2DB;--text:#1A1A2E;--muted:#6B6860;--green:#1A5C35;}
+:root{--navy:#04306589;--navy-mid:#142A4E;--gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#F5E9C8;--black:#080C12;--white:#FAFAF8;--offwhite:#F2F0EB;--grey:#E5E2DB;--text:#1A1A2E;--muted:#6B6860;--green:#1A5C35;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--offwhite);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;overflow-x:hidden;}
@@ -27,6 +27,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 .nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
 .nav-links a:hover{color:var(--gold);}
 .nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+.logo-image{height:50px;width:auto;object-fit:contain;}
 .admin-dropdown{position:relative;}
 .admin-dropdown-btn{display:flex;align-items:center;gap:4px;cursor:pointer;}
 .admin-dropdown-btn::after{content:'▼';font-size:8px;margin-left:4px;}
@@ -94,11 +95,7 @@ textarea{resize:vertical;min-height:100px;}
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
-      <div>
-        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
-        <div class="nav-sub">Nairobi · Est. 2024</div>
-      </div>
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="logo-image">
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -137,10 +134,11 @@ textarea{resize:vertical;min-height:100px;}
 
     <div class="admin-grid" id="admin-content" style="display:none;">
       <div class="admin-card">
-        <h2 class="card-title">Add New Product</h2>
+        <h2 class="card-title" id="product-form-title">Add New Product</h2>
         <div class="error-msg" id="error-msg"></div>
         <div class="success-msg" id="success-msg"></div>
-        <form onsubmit="handleAddProduct(event)">
+        <form onsubmit="handleProductSubmit(event)" id="product-form">
+          <input type="hidden" id="p-id" value="">
           <div class="form-group">
             <label for="p-name">Product Name</label>
             <input type="text" id="p-name" placeholder="e.g., Marketing Guide eBook" required>
@@ -160,7 +158,7 @@ textarea{resize:vertical;min-height:100px;}
               <option value="ebook">eBook</option>
               <option value="template">Template</option>
               <option value="course">Course</option>
-              <option value="course">Membership</option>
+              <option value="membership">Membership</option>
             </select>
           </div>
           <div class="form-group">
@@ -175,13 +173,80 @@ textarea{resize:vertical;min-height:100px;}
             <label for="p-features">Features (one per line)</label>
             <textarea id="p-features" placeholder="50-page PDF guide&#10;Nairobi examples&#10;Marketing calculator" required></textarea>
           </div>
-          <button type="submit" class="submit-btn">Add Product →</button>
+          <button type="submit" class="submit-btn" id="product-submit-btn">Add Product →</button>
+          <button type="button" class="submit-btn" id="cancel-edit-btn" onclick="cancelEdit()" style="display:none;background:var(--grey);color:var(--text);">Cancel</button>
         </form>
       </div>
 
       <div class="admin-card">
         <h2 class="card-title">Existing Products</h2>
         <div class="products-list" id="products-list"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2 class="card-title">Add Success Story</h2>
+        <div class="error-msg" id="story-error"></div>
+        <div class="success-msg" id="story-success"></div>
+        <form onsubmit="handleAddStory(event)">
+          <div class="form-group">
+            <label for="story-client">Client Name</label>
+            <input type="text" id="story-client" placeholder="e.g., Geovince Security" required>
+          </div>
+          <div class="form-group">
+            <label for="story-industry">Industry</label>
+            <input type="text" id="story-industry" placeholder="e.g., Security Services" required>
+          </div>
+          <div class="form-group">
+            <label for="story-desc">Description</label>
+            <textarea id="story-desc" placeholder="What work did we do for this client..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="story-result">Result</label>
+            <input type="text" id="story-result" placeholder="e.g., 300% increase in enquiries" required>
+          </div>
+          <button type="submit" class="submit-btn">Add Story →</button>
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h2 class="card-title">Existing Stories</h2>
+        <div class="products-list" id="stories-list"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2 class="card-title">Add Client Review</h2>
+        <div class="error-msg" id="review-error"></div>
+        <div class="success-msg" id="review-success"></div>
+        <form onsubmit="handleAddReview(event)">
+          <div class="form-group">
+            <label for="review-name">Client Name</label>
+            <input type="text" id="review-name" placeholder="e.g., Wanjiku M." required>
+          </div>
+          <div class="form-group">
+            <label for="review-role">Client Role</label>
+            <input type="text" id="review-role" placeholder="e.g., Restaurant Owner, Kilimani" required>
+          </div>
+          <div class="form-group">
+            <label for="review-comment">Review</label>
+            <textarea id="review-comment" placeholder="What did the client say..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="review-rating">Rating (1-5)</label>
+            <select id="review-rating" required>
+              <option value="5">★★★★★ (5)</option>
+              <option value="4">★★★★☆ (4)</option>
+              <option value="3">★★★☆☆ (3)</option>
+              <option value="2">★★☆☆☆ (2)</option>
+              <option value="1">★☆☆☆☆ (1)</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn">Add Review →</button>
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h2 class="card-title">Existing Reviews</h2>
+        <div class="products-list" id="reviews-list"></div>
       </div>
     </div>
   </div>
@@ -190,6 +255,8 @@ textarea{resize:vertical;min-height:100px;}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const sb = supabase.createClient('https://wzjxazdksgjrhjycocpw.supabase.co', 'sb_publishable_opqpZEV2qXCtyhZ8stvzvg_HRzKlicl');
+  
+  let allProducts = []; // Store products globally for editing
 
   async function checkAdminAccess() {
     const loading = document.getElementById('loading');
@@ -214,10 +281,15 @@ textarea{resize:vertical;min-height:100px;}
     loading.style.display = 'none';
     adminContent.style.display = 'grid';
     loadProducts();
+    loadStories();
+    loadReviews();
   }
 
   async function loadProducts() {
     const { data: products } = await sb.from('products').select('*').order('created_at', { ascending: false });
+    
+    // Store products globally for editing
+    allProducts = products || [];
     
     const productsList = document.getElementById('products-list');
     
@@ -286,7 +358,207 @@ textarea{resize:vertical;min-height:100px;}
   }
 
   function editProduct(id) {
-    alert('Edit functionality coming soon. For now, delete and re-add the product.');
+    // Find the product in the products list
+    const product = allProducts.find(p => p.id === id);
+    if (!product) return;
+
+    // Populate form with product data
+    document.getElementById('p-id').value = product.id;
+    document.getElementById('p-name').value = product.name;
+    document.getElementById('p-icon').value = product.icon;
+    document.getElementById('p-badge').value = product.badge;
+    document.getElementById('p-category').value = product.category;
+    document.getElementById('p-price').value = product.price;
+    document.getElementById('p-desc').value = product.description;
+    document.getElementById('p-features').value = product.features ? product.features.join('\n') : '';
+
+    // Update UI for edit mode
+    document.getElementById('product-form-title').textContent = 'Edit Product';
+    document.getElementById('product-submit-btn').textContent = 'Update Product →';
+    document.getElementById('cancel-edit-btn').style.display = 'inline-block';
+
+    // Scroll to form
+    document.querySelector('.admin-card').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function cancelEdit() {
+    // Reset form
+    document.getElementById('product-form').reset();
+    document.getElementById('p-id').value = '';
+
+    // Reset UI for add mode
+    document.getElementById('product-form-title').textContent = 'Add New Product';
+    document.getElementById('product-submit-btn').textContent = 'Add Product →';
+    document.getElementById('cancel-edit-btn').style.display = 'none';
+  }
+
+  async function handleProductSubmit(e) {
+    e.preventDefault();
+    const errorMsg = document.getElementById('error-msg');
+    const successMsg = document.getElementById('success-msg');
+
+    errorMsg.classList.remove('show');
+    successMsg.classList.remove('show');
+
+    const productId = document.getElementById('p-id').value;
+    const product = {
+      name: document.getElementById('p-name').value,
+      icon: document.getElementById('p-icon').value,
+      badge: document.getElementById('p-badge').value,
+      category: document.getElementById('p-category').value,
+      price: parseInt(document.getElementById('p-price').value),
+      description: document.getElementById('p-desc').value,
+      features: document.getElementById('p-features').value.split('\n').filter(f => f.trim())
+    };
+
+    let error;
+    if (productId) {
+      // Update existing product
+      const { error: updateError } = await sb.from('products').update(product).eq('id', productId);
+      error = updateError;
+    } else {
+      // Add new product
+      const { error: insertError } = await sb.from('products').insert(product);
+      error = insertError;
+    }
+
+    if (error) {
+      errorMsg.textContent = error.message;
+      errorMsg.classList.add('show');
+    } else {
+      successMsg.textContent = productId ? 'Product updated successfully!' : 'Product added successfully!';
+      successMsg.classList.add('show');
+      
+      // Reset form and reload products
+      cancelEdit();
+      loadProducts();
+    }
+  }
+
+  async function loadStories() {
+    const { data: stories } = await sb.from('success_stories').select('*').order('created_at', { ascending: false });
+    
+    const storiesList = document.getElementById('stories-list');
+    
+    if (!stories || stories.length === 0) {
+      storiesList.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No stories yet</p>';
+      return;
+    }
+
+    storiesList.innerHTML = stories.map(story => `
+      <div class="product-item">
+        <div class="p-info">
+          <div class="p-name">${story.client_name}</div>
+          <div class="p-meta">${story.industry}</div>
+        </div>
+        <div class="p-actions">
+          <button class="p-btn delete" onclick="deleteStory('${story.id}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function handleAddStory(e) {
+    e.preventDefault();
+    const errorMsg = document.getElementById('story-error');
+    const successMsg = document.getElementById('story-success');
+
+    errorMsg.classList.remove('show');
+    successMsg.classList.remove('show');
+
+    const story = {
+      client_name: document.getElementById('story-client').value,
+      industry: document.getElementById('story-industry').value,
+      description: document.getElementById('story-desc').value,
+      result: document.getElementById('story-result').value
+    };
+
+    const { error } = await sb.from('success_stories').insert(story);
+
+    if (error) {
+      errorMsg.textContent = error.message;
+      errorMsg.classList.add('show');
+    } else {
+      successMsg.textContent = 'Success story added successfully!';
+      successMsg.classList.add('show');
+      e.target.reset();
+      loadStories();
+    }
+  }
+
+  async function deleteStory(id) {
+    if (!confirm('Are you sure you want to delete this story?')) return;
+
+    const { error } = await sb.from('success_stories').delete().eq('id', id);
+
+    if (error) {
+      alert('Error deleting story: ' + error.message);
+    } else {
+      loadStories();
+    }
+  }
+
+  async function loadReviews() {
+    const { data: reviews } = await sb.from('client_reviews').select('*').order('created_at', { ascending: false });
+    
+    const reviewsList = document.getElementById('reviews-list');
+    
+    if (!reviews || reviews.length === 0) {
+      reviewsList.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No reviews yet</p>';
+      return;
+    }
+
+    reviewsList.innerHTML = reviews.map(review => `
+      <div class="product-item">
+        <div class="p-info">
+          <div class="p-name">${review.client_name}</div>
+          <div class="p-meta">${'★'.repeat(review.rating)} · ${review.client_role}</div>
+        </div>
+        <div class="p-actions">
+          <button class="p-btn delete" onclick="deleteReview('${review.id}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function handleAddReview(e) {
+    e.preventDefault();
+    const errorMsg = document.getElementById('review-error');
+    const successMsg = document.getElementById('review-success');
+
+    errorMsg.classList.remove('show');
+    successMsg.classList.remove('show');
+
+    const review = {
+      client_name: document.getElementById('review-name').value,
+      client_role: document.getElementById('review-role').value,
+      comment: document.getElementById('review-comment').value,
+      rating: parseInt(document.getElementById('review-rating').value)
+    };
+
+    const { error } = await sb.from('client_reviews').insert(review);
+
+    if (error) {
+      errorMsg.textContent = error.message;
+      errorMsg.classList.add('show');
+    } else {
+      successMsg.textContent = 'Review added successfully!';
+      successMsg.classList.add('show');
+      e.target.reset();
+      loadReviews();
+    }
+  }
+
+  async function deleteReview(id) {
+    if (!confirm('Are you sure you want to delete this review?')) return;
+
+    const { error } = await sb.from('client_reviews').delete().eq('id', id);
+
+    if (error) {
+      alert('Error deleting review: ' + error.message);
+    } else {
+      loadReviews();
+    }
   }
 
   function toggleAdminMenu() {

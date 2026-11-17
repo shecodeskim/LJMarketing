@@ -31,6 +31,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;background:r
 .nav-links a{font-size:12px;font-weight:500;color:rgba(250,250,248,0.65);padding:8px 12px;border-radius:6px;transition:all 0.2s;}
 .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.08);}
 .nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:8px!important;padding:9px 18px!important;}
+.logo-image{height:50px;width:auto;object-fit:contain;}
+.auth-logo-image{height:80px;width:auto;object-fit:contain;margin:0 auto 16px;display:block;}
 
 .auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 60px;background:var(--offwhite);}
 .auth-container{max-width:440px;width:100%;background:white;border-radius:20px;padding:48px 40px;box-shadow:0 8px 32px rgba(11,31,58,0.1);border:1px solid var(--grey);}
@@ -72,11 +74,7 @@ input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
-      <div>
-        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
-        <div class="nav-sub">Nairobi · Est. 2024</div>
-      </div>
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="logo-image">
     </a>
     <ul class="nav-links">
       <li><a href="signup.html" class="nav-cta">Sign Up</a></li>
@@ -87,7 +85,7 @@ input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
 <div class="auth-page">
   <div class="auth-container">
     <div class="auth-header">
-      <div class="auth-logo"><div class="nav-monogram">L<span>&</span>J</div></div>
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="auth-logo-image">
       <h1 class="auth-title">Welcome Back</h1>
       <p class="auth-sub">Login to your account</p>
     </div>
@@ -102,6 +100,9 @@ input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" placeholder="Your password" required>
+      </div>
+      <div style="text-align:right;margin-bottom:16px;">
+        <a href="#" onclick="handleForgotPassword(event)" style="font-size:12px;color:var(--gold);font-weight:600;">Forgot password?</a>
       </div>
       <button type="submit" class="submit-btn" id="submit-btn">Login →</button>
     </form>
@@ -152,6 +153,31 @@ input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
       } else {
         window.location.href = 'account.html';
       }
+    }
+  }
+
+  async function handleForgotPassword(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const errorMsg = document.getElementById('error-msg');
+
+    if (!email) {
+      errorMsg.textContent = 'Please enter your email address first';
+      errorMsg.classList.add('show');
+      return;
+    }
+
+    errorMsg.classList.remove('show');
+
+    const { error } = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password.html`
+    });
+
+    if (error) {
+      errorMsg.textContent = error.message;
+      errorMsg.classList.add('show');
+    } else {
+      alert('Password reset email sent! Check your inbox for instructions.');
     }
   }
 </script>

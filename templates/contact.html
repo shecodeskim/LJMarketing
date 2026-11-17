@@ -157,19 +157,16 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
   .map-inner{grid-template-columns:1fr;}
   .form-row{grid-template-columns:1fr;}
 }
+.logo-image{height:50px;width:auto;object-fit:contain;}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">
-      <div class="nav-badge"><div class="nav-monogram">L<span>&</span>J</div></div>
-      <div>
-        <div class="nav-name">L<span>&</span>J Marketing Kenya</div>
-        <div class="nav-sub">Nairobi · Est. 2024</div>
-      </div>
-    </div>
+    <a href="index.html" class="nav-logo" aria-label="L&J Marketing Kenya home">
+      <img src="images/logo.jpeg" alt="L&J Marketing Kenya" class="logo-image">
+    </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="index.html#services">Services</a></li>
@@ -232,7 +229,7 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
             <div class="info-icon">📧</div>
             <div>
               <div class="info-text-title">Email</div>
-              <div class="info-text-val"><a href="mailto:hello@ljmarketingkenya.co.ke">hello@ljmarketingkenya.co.ke</a></div>
+              <div class="info-text-val"><a href="mailto:hello@ljmarketingkenya.co.ke">ljmarketingagencykenya@gmail.com</a></div>
             </div>
           </div>
         </div>
@@ -344,19 +341,54 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
         <div class="booking-note">"The free call alone gave us more clarity than 6 months of trying to figure it out ourselves." — Client, Nairobi</div>
       </div>
 
-      <!-- Calendly Embed Area -->
+      <!-- Booking Form -->
       <div class="calendly-embed" id="book">
         <div class="cal-icon">📅</div>
         <div class="cal-title">Book Your Free Strategy Call</div>
-        <div class="cal-desc">Choose a time that works for you. Calls are conducted via phone, WhatsApp video, or Google Meet.</div>
-        <div class="cal-steps">
-          <div class="cal-step"><div class="cal-step-num">1</div>Click the button below to open booking calendar</div>
-          <div class="cal-step"><div class="cal-step-num">2</div>Select your preferred date and time</div>
-          <div class="cal-step"><div class="cal-step-num">3</div>Enter your name and WhatsApp number</div>
-          <div class="cal-step"><div class="cal-step-num">4</div>Receive confirmation + reminder on WhatsApp</div>
+        <div class="cal-desc">Fill in your details below and we'll confirm your booking via WhatsApp and email within 2 hours.</div>
+        <form onsubmit="handleBooking(event)" style="width:100%;max-width:400px;margin-top:24px;">
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Full Name *</label>
+            <input type="text" id="booking-name" required placeholder="Your name" style="width:100%;padding:12px;border:1px solid var(--grey);border-radius:8px;font-size:14px;">
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">WhatsApp Number *</label>
+            <input type="tel" id="booking-phone" required placeholder="07XX XXX XXX" style="width:100%;padding:12px;border:1px solid var(--grey);border-radius:8px;font-size:14px;">
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Email Address *</label>
+            <input type="email" id="booking-email" required placeholder="your@email.com" style="width:100%;padding:12px;border:1px solid var(--grey);border-radius:8px;font-size:14px;">
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Preferred Date *</label>
+            <input type="date" id="booking-date" required style="width:100%;padding:12px;border:1px solid var(--grey);border-radius:8px;font-size:14px;">
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Preferred Time *</label>
+            <select id="booking-time" required style="width:100%;padding:12px;border:1px solid var(--grey);border-radius:8px;font-size:14px;">
+              <option value="">Select time...</option>
+              <option value="9:00 AM">9:00 AM</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="2:00 PM">2:00 PM</option>
+              <option value="3:00 PM">3:00 PM</option>
+              <option value="4:00 PM">4:00 PM</option>
+            </select>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Business Name (Optional)</label>
+            <input type="text" id="booking-business" placeholder="Your business name" style="width:100%;padding:12px;border:1px solid var(--grey);border-radius:8px;font-size:14px;">
+          </div>
+          <div style="margin-bottom:24px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">What would you like to discuss? (Optional)</label>
+            <textarea id="booking-topic" rows="3" placeholder="Briefly describe what you'd like help with..." style="width:100%;padding:12px;border:1px solid var(--grey);border-radius:8px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <button type="submit" class="cal-btn" style="width:100%;">📅 Book My Free Call</button>
+          <div class="cal-alt" style="margin-top:16px;">Or book directly via WhatsApp: <a href="https://wa.me/254740788160?text=Hi!%20I%27d%20like%20to%20book%20a%20free%20strategy%20call.">Click here to message us</a></div>
+        </form>
+        <div id="booking-success" style="display:none;text-align:center;padding:20px;background:#E8F5E9;border-radius:10px;color:#1A5C35;font-weight:600;margin-top:24px;">
+          ✅ Booking request sent! We'll confirm your slot via WhatsApp and email within 2 hours.
         </div>
-        <a href="https://calendly.com/ljmarketingkenya" target="_blank" class="cal-btn">📅 Open Booking Calendar</a>
-        <div class="cal-alt">Or book via WhatsApp: <a href="https://wa.me/254740788160?text=Hi!%20I%27d%20like%20to%20book%20a%20free%20strategy%20call.">Click here to message us</a></div>
       </div>
     </div>
   </div>
@@ -404,13 +436,85 @@ footer{background:var(--black);padding:48px 0 24px;border-top:1px solid rgba(201
 
 <script>
 function toggleMenu(){document.getElementById('mobile-nav').classList.toggle('open');}
+
+async function handleBooking(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('booking-name').value;
+  const phone = document.getElementById('booking-phone').value;
+  const email = document.getElementById('booking-email').value;
+  const date = document.getElementById('booking-date').value;
+  const time = document.getElementById('booking-time').value;
+  const business = document.getElementById('booking-business').value || 'Not specified';
+  const topic = document.getElementById('booking-topic').value || 'Not specified';
+
+  // Create WhatsApp message
+  const whatsappMessage = `*New Strategy Call Booking*%0A%0A` +
+    `*Name:* ${name}%0A` +
+    `*Phone:* ${phone}%0A` +
+    `*Email:* ${email}%0A` +
+    `*Business:* ${business}%0A` +
+    `*Preferred Date:* ${date}%0A` +
+    `*Preferred Time:* ${time}%0A` +
+    `*Topic:* ${topic}%0A%0A` +
+    `Please confirm this booking via WhatsApp or email.`;
+
+  // Send to WhatsApp
+  const whatsappUrl = `https://wa.me/254740788160?text=${whatsappMessage}`;
+  window.open(whatsappUrl, '_blank');
+
+  // Create email body
+  const emailSubject = encodeURIComponent('New Strategy Call Booking Request');
+  const emailBody = encodeURIComponent(
+    `Name: ${name}\n` +
+    `Phone: ${phone}\n` +
+    `Email: ${email}\n` +
+    `Business: ${business}\n` +
+    `Preferred Date: ${date}\n` +
+    `Preferred Time: ${time}\n` +
+    `Topic: ${topic}\n\n` +
+    `Please confirm this booking.`
+  );
+  
+  // Open email client
+  setTimeout(() => {
+    window.location.href = `mailto:ljmarketingagencykenya@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+  }, 1000);
+
+  // Show success message
+  document.getElementById('booking-success').style.display = 'block';
+  e.target.reset();
+}
+
 async function handleSubmit(e) {
   e.preventDefault();
-  const { error } = await sb.from('leads').insert({
-    name: fname.value + ' ' + lname.value, email: email.value, phone: phone.value,
-    business: business.value, service: service.value, budget: budget.value, message: message.value
-  });
-  alert(error ? 'Something went wrong, please try WhatsApp.' : 'Thanks! We will respond within 2 hours.');
+  
+  const firstName = document.getElementById('fname').value;
+  const lastName = document.getElementById('lname').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const business = document.getElementById('business').value || 'Not specified';
+  const service = document.getElementById('service').value || 'Not specified';
+  const budget = document.getElementById('budget').value || 'Not specified';
+  const message = document.getElementById('message').value;
+
+  // Create WhatsApp message
+  const whatsappMessage = `*New Enquiry from Website*%0A%0A` +
+    `*Name:* ${firstName} ${lastName}%0A` +
+    `*Email:* ${email}%0A` +
+    `*Phone:* ${phone}%0A` +
+    `*Business:* ${business}%0A` +
+    `*Service Interested In:* ${service}%0A` +
+    `*Budget Range:* ${budget}%0A%0A` +
+    `*Message:*%0A${message}`;
+
+  // Redirect to WhatsApp
+  const whatsappUrl = `https://wa.me/254740788160?text=${whatsappMessage}`;
+  window.open(whatsappUrl, '_blank');
+
+  // Show success message
+  document.getElementById('form-success').style.display = 'block';
+  e.target.reset();
 }
 </script>
 
